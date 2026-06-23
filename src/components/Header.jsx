@@ -4,9 +4,9 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <Link to="/new">New Match</Link>
+        <Link to="/new">New Record</Link>
         {' '}
-        <Link to="/matches">Matches</Link>
+        <Link to="/records">Records</Link>
       </nav>
     </header>
   );

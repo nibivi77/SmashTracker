@@ -5,15 +5,15 @@ export function useIndexedDB() {
   const [dbReady, setDbReady] = useState(false);
 
   useEffect(() => {
+    // indexedDB.deleteDatabase("smash-duo-tracker");
     const request = indexedDB.open("smash-duo-tracker", 1);
 
     request.onupgradeneeded = (event) => {
       const database = event.target.result;
 
-      if (!database.objectStoreNames.contains("matches")) {
-        database.createObjectStore("matches", {
-          keyPath: "id",
-          autoIncrement: true,
+      if (!database.objectStoreNames.contains("records")) {
+        database.createObjectStore("records", {
+          keyPath: "duoKey",
         });
       }
     };
@@ -28,38 +28,50 @@ export function useIndexedDB() {
     };
   }, []);
 
-  // Add a match
-  const addItem = (match) =>
+  // Add a record
+  const saveRecord = (record) =>
     new Promise((resolve, reject) => {
-      const tx = db.transaction("matches", "readwrite");
-      const store = tx.objectStore("matches");
-      const request = store.add(match);
+      const tx = db.transaction("records", "readwrite");
+      const store = tx.objectStore("records");
+      const request = store.put(record);
 
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
 
-  // Get all matches
-  const getAllItems = () =>
+  // Get a specific record by duoKey
+  const getRecord = (duoKey) =>
     new Promise((resolve, reject) => {
-      const tx = db.transaction("matches", "readonly");
-      const store = tx.objectStore("matches");
+    const tx = db.transaction("records", "readonly");
+    const store = tx.objectStore("records");
+
+    const request = store.get(duoKey);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+
+  // Get all records
+  const getAllRecords = () =>
+    new Promise((resolve, reject) => {
+      const tx = db.transaction("records", "readonly");
+      const store = tx.objectStore("records");
       const request = store.getAll();
 
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
 
-  // Delete a match
-  const deleteItem = (id) =>
+  // Delete a record
+  const deleteRecord = (id) =>
     new Promise((resolve, reject) => {
-      const tx = db.transaction("matches", "readwrite");
-      const store = tx.objectStore("matches");
+      const tx = db.transaction("records", "readwrite");
+      const store = tx.objectStore("records");
       const request = store.delete(id);
 
       request.onsuccess = () => resolve();
       request.onerror = () => reject(request.error);
     });
 
-  return { addItem, getAllItems, deleteItem, dbReady };
+  return { saveRecord, getAllRecords, deleteRecord, getRecord, dbReady };
 }

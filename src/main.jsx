@@ -2,12 +2,12 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './App.jsx'
-import { MatchesProvider } from './context/MatchesContext.jsx'
+import { RecordsProvider } from './context/RecordsContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <MatchesProvider>
+    <RecordsProvider>
       <App />
-    </MatchesProvider>
+    </RecordsProvider>
   </StrictMode>,
 )
