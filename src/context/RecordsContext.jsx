@@ -1,44 +1,60 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useIndexedDB } from "../hooks/useIndexedDB";
 
 const RecordsContext = createContext();
 
-export function RecordsProvider({ children }) {
-  const {
-    saveRecord: dbSaveRecord,
-    getAllRecords,
-    deleteRecord: dbDeleteRecord,
-    getRecord,
-    dbReady
-  } = useIndexedDB();
+const STORAGE_KEY = "smashtracker-records";
 
+function loadRecords() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error("Failed to load records from localStorage:", error);
+    return [];
+  }
+}
+
+function saveRecordsToStorage(records) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  } catch (error) {
+    console.error("Failed to save records to localStorage:", error);
+  }
+}
+
+export function RecordsProvider({ children }) {
   const [records, setRecords] = useState([]);
 
-  // Load records when DB is ready
   useEffect(() => {
-    if (!dbReady) return;
-    getAllRecords().then(setRecords);
-  }, [dbReady]);
+    setRecords(loadRecords());
+  }, []);
 
-  // Save or overwrite record
-  const saveRecord = async (record) => {
-    await dbSaveRecord(record);
-
+  const saveRecord = (record) => {
     setRecords((prev) => {
-      const filtered = prev.filter(
-        (r) => r.duoKey !== record.duoKey
-      );
-      return [...filtered, record];
+      const filtered = prev.filter((r) => r.duoKey !== record.duoKey);
+      const updated = [...filtered, record];
+      saveRecordsToStorage(updated);
+      return updated;
     });
   };
 
-  // Delete record
-  const deleteRecord = async (duoKey) => {
-    await dbDeleteRecord(duoKey);
+  const deleteRecord = (duoKey) => {
+    setRecords((prev) => {
+      const updated = prev.filter((r) => r.duoKey !== duoKey);
+      saveRecordsToStorage(updated);
+      return updated;
+    });
+  };
 
-    setRecords((prev) =>
-      prev.filter((r) => r.duoKey !== duoKey)
-    );
+  const getRecord = (duoKey) => {
+    return records.find((r) => r.duoKey === duoKey) || null;
+  };
+
+  const clearAllRecords = () => {
+    setRecords([]);
+    localStorage.removeItem(STORAGE_KEY);
   };
 
   return (
@@ -48,7 +64,7 @@ export function RecordsProvider({ children }) {
         saveRecord,
         deleteRecord,
         getRecord,
-        dbReady
+        clearAllRecords
       }}
     >
       {children}

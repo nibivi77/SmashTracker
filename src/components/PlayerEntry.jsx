@@ -50,7 +50,7 @@ function updateField(field, value) {
         {selected && (
         <div style={{ marginTop: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <img
-            src={selected.icon}
+            src={`${import.meta.env.BASE_URL}${selected.icon}`}
             alt={selected.name}
             style={{ width: "48px", height: "48px" }}
           />
@@ -74,7 +74,7 @@ function updateField(field, value) {
               onClick={() => handleSelect(char)}
             >
               <img
-                src={char.icon}
+                src={`${import.meta.env.BASE_URL}${char.icon}`}
                 alt={char.name}
                 style={{ width: "32px", height: "32px", borderRadius: "4px" }}
               />

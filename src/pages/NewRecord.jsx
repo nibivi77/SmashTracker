@@ -2,43 +2,35 @@ import { useState } from "react";
 import PlayerEntry from "../components/PlayerEntry";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
-import {getTeamRatio} from "../utils/calculations";
-
+import { getTeamRatio } from "../utils/calculations";
 
 export default function NewRecord() {
   const [player1, setPlayer1] = useState({});
   const [player2, setPlayer2] = useState({});
   const { saveRecord, getRecord, clearAllRecords } = useRecords();
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const record = {
       duoKey: createDuoKey(player1.characterId, player2.characterId),
       p1Character: player1.characterId,
       p2Character: player2.characterId,
-      p1DamageGiven: player1.damageGiven,
-      p1DamageTaken: player1.damageTaken,
-
-      p2DamageGiven: player2.damageGiven,
-      p2DamageTaken: player2.damageTaken,
-
+      p1DamageGiven: Number(player1.damageGiven),
+      p1DamageTaken: Number(player1.damageTaken),
+      p2DamageGiven: Number(player2.damageGiven),
+      p2DamageTaken: Number(player2.damageTaken),
       timestamp: Date.now()
     };
 
-    console.log(record);
+    const existing = getRecord(record.duoKey);
 
-    const existing = await getRecord(record.duoKey);
-  console.log(existing);
     if (!existing) {
-      await saveRecord(record);
+      saveRecord(record);
     } else {
-      const currentRatio =
-        getTeamRatio(existing);
+      const currentRatio = getTeamRatio(existing);
+      const newRatio = getTeamRatio(record);
 
-      const newRatio =
-        getTeamRatio(record);
-
-      if (newRatio > currentRatio) {
-        await saveRecord(record);
+      if (newRatio >= currentRatio) {
+        saveRecord(record);
       }
     }
   }
