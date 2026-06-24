@@ -1,0 +1,103 @@
+import { characters } from "../data/characters";
+
+export default function RecordCard({ record, onDelete }) {
+  const p1Char = characters.find((c) => c.id === record.p1Character);
+  const p2Char = characters.find((c) => c.id === record.p2Character);
+
+  const p1Ratio =
+    record.p1DamageTaken > 0
+      ? (record.p1DamageGiven / record.p1DamageTaken).toFixed(2)
+      : "∞";
+
+  const p2Ratio =
+    record.p2DamageTaken > 0
+      ? (record.p2DamageGiven / record.p2DamageTaken).toFixed(2)
+      : "∞";
+
+  const totalDealt =
+    Number(record.p1DamageGiven) + Number(record.p2DamageGiven);
+
+  const totalTaken =
+    Number(record.p1DamageTaken) + Number(record.p2DamageTaken);
+
+  const duoRatio =
+    totalTaken > 0 ? (totalDealt / totalTaken).toFixed(2) : "∞";
+
+  return (
+    <div
+      style={{
+        border: "1px solid #ccc",
+        padding: "1rem",
+        borderRadius: "8px"
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center"
+        }}
+      >
+        {p1Char && (
+          <img
+            src={`${import.meta.env.BASE_URL}${p1Char.icon}`}
+            alt={p1Char.name}
+            style={{ width: "32px", height: "32px" }}
+          />
+        )}
+        <strong>Player 1:</strong> {p1Char?.name}
+      </div>
+
+      <div>Damage Dealt: {record.p1DamageGiven}</div>
+      <div>Damage Taken: {record.p1DamageTaken}</div>
+      <div>
+        Ratio: <strong>{p1Ratio}</strong>
+      </div>
+
+      <div
+        style={{
+          marginTop: "0.75rem",
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center"
+        }}
+      >
+        {p2Char && (
+          <img
+            src={`${import.meta.env.BASE_URL}${p2Char.icon}`}
+            alt={p2Char.name}
+            style={{ width: "32px", height: "32px" }}
+          />
+        )}
+        <strong>Player 2:</strong> {p2Char?.name}
+      </div>
+
+      <div>Damage Dealt: {record.p2DamageGiven}</div>
+      <div>Damage Taken: {record.p2DamageTaken}</div>
+      <div>
+        Ratio: <strong>{p2Ratio}</strong>
+      </div>
+
+      <div style={{ marginTop: "0.75rem" }}>
+        <strong>Duo Ratio:</strong> {duoRatio}
+      </div>
+
+      {onDelete && (
+        <button
+          onClick={() => onDelete(record.duoKey)}
+          style={{
+            marginTop: "0.75rem",
+            background: "red",
+            color: "white",
+            border: "none",
+            padding: "0.5rem 1rem",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          Delete Record
+        </button>
+      )}
+    </div>
+  );
+}

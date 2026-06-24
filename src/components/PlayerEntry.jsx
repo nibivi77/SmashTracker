@@ -7,48 +7,58 @@ export default function PlayerEntry({ label, onChange }) {
   const [damageTaken, setDamageTaken] = useState("");
   const [damageGiven, setDamageGiven] = useState("");
 
-const filtered = characters.filter((c) =>
-  c.name.toLowerCase().includes(query.toLowerCase())
-);
+  const filtered = characters.filter((c) =>
+    c.name.toLowerCase().includes(query.toLowerCase())
+  );
 
-function handleSelect(character) {
-  setSelected(character);
-  setQuery(character.name);
+  function handleSelect(character) {
+    setSelected(character);
+    setQuery(character.name);
 
-  onChange({
-    characterId: character.id,
-    damageTaken,
-    damageGiven
-  });
-}
+    onChange({
+      characterId: character.id,
+      damageTaken,
+      damageGiven
+    });
+  }
 
-function updateField(field, value) {
-  if (field === "taken") setDamageTaken(value);
-  if (field === "given") setDamageGiven(value);
+  function updateField(field, value) {
+    if (field === "taken") setDamageTaken(value);
+    if (field === "given") setDamageGiven(value);
 
-  onChange({
-    characterId: selected?.id || null,
-    damageTaken: field === "taken" ? value : damageTaken,
-    damageGiven: field === "given" ? value : damageGiven
-  });
-}
+    onChange({
+      characterId: selected?.id || null,
+      damageTaken: field === "taken" ? value : damageTaken,
+      damageGiven: field === "given" ? value : damageGiven
+    });
+  }
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <h3>{label}</h3>
+    <fieldset style={{ marginBottom: "2rem" }}>
+      <legend>{label}</legend>
 
-      {/* Character Search */}
-      <input
-        type="text"
-        placeholder="Search character..."
-        value={query}
-        onChange={(e) => {
-        setQuery(e.target.value);
-        setSelected(null); 
-}}
-      />
-        {selected && (
-        <div style={{ marginTop: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+      <label style={{ display: "block" }}>
+        Character
+        <input
+          type="text"
+          placeholder="Search character..."
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setSelected(null);
+          }}
+        />
+      </label>
+
+      {selected && (
+        <div
+          style={{
+            marginTop: "1rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem"
+          }}
+        >
           <img
             src={`${import.meta.env.BASE_URL}${selected.icon}`}
             alt={selected.name}
@@ -56,10 +66,9 @@ function updateField(field, value) {
           />
           <strong>{selected.name}</strong>
         </div>
-  )}
+      )}
 
-      {/* Autocomplete dropdown */}
-      {query.length > 0  && !selected && (
+      {query.length > 0 && !selected && (
         <ul style={{ border: "1px solid #ccc", padding: "0.5rem" }}>
           {filtered.map((char) => (
             <li
@@ -84,21 +93,27 @@ function updateField(field, value) {
         </ul>
       )}
 
-      {/* Damage fields */}
       <div style={{ marginTop: "1rem" }}>
-        <input
-          type="number"
-          placeholder="Damage Given"
-          value={damageGiven}
-          onChange={(e) => updateField("given", e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Damage Taken"
-          value={damageTaken}
-          onChange={(e) => updateField("taken", e.target.value)}
-        />
+        <label style={{ display: "block", marginBottom: "0.5rem" }}>
+          Damage Given
+          <input
+            type="number"
+            min="1"
+            value={damageGiven}
+            onChange={(e) => updateField("given", e.target.value)}
+          />
+        </label>
+
+        <label style={{ display: "block" }}>
+          Damage Taken
+          <input
+            type="number"
+            min="1"
+            value={damageTaken}
+            onChange={(e) => updateField("taken", e.target.value)}
+          />
+        </label>
       </div>
-    </div>
+    </fieldset>
   );
 }

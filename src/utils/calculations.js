@@ -1,23 +1,13 @@
-
-export function calculateRatio(
-  damageGiven,
-  damageTaken
-) {
-  if (damageTaken === 0) {
-    return Infinity;
-  }
-
+export function calculateRatio(damageGiven, damageTaken) {
   return damageGiven / damageTaken;
 }
 
 export function getTeamRatio(record) {
   const dealt =
-    record.p1DamageGiven +
-    record.p2DamageGiven;
+    Number(record.p1DamageGiven) + Number(record.p2DamageGiven);
 
   const taken =
-    record.p1DamageTaken +
-    record.p2DamageTaken;
+    Number(record.p1DamageTaken) + Number(record.p2DamageTaken);
 
   return calculateRatio(dealt, taken);
 }
