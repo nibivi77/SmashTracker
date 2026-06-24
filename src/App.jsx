@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename={'/'}>
+      <BrowserRouter basename={'/SmashTracker'}>
         <Header />
         <Routes>
           <Route path="/new" element={<NewRecord />} />
