@@ -1,24 +1,64 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { DATA_VERSION, STORAGE_KEY } from "../data/schema";
 
 const RecordsContext = createContext();
 
-const STORAGE_KEY = "smashtracker-records";
+function normalizeRecordsData(parsed) {
+  if (Array.isArray(parsed)) {
+    return {
+      version: DATA_VERSION,
+      records: parsed
+    };
+  }
 
-function loadRecords() {
+  if (
+    parsed &&
+    typeof parsed === "object" &&
+    Array.isArray(parsed.records)
+  ) {
+    return {
+      version:
+        typeof parsed.version === "number" ? parsed.version : DATA_VERSION,
+      records: parsed.records
+    };
+  }
+
+  return {
+    version: DATA_VERSION,
+    records: []
+  };
+}
+
+function loadRecordsData() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
+
+    if (!raw) {
+      return {
+        version: DATA_VERSION,
+        records: []
+      };
+    }
+
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    return normalizeRecordsData(parsed);
   } catch (error) {
     console.error("Failed to load records from localStorage:", error);
-    return [];
+    return {
+      version: DATA_VERSION,
+      records: []
+    };
   }
 }
 
-function saveRecordsToStorage(records) {
+function saveRecordsDataToStorage(records) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    const payload = {
+      version: DATA_VERSION,
+      records
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   } catch (error) {
     console.error("Failed to save records to localStorage:", error);
   }
@@ -28,14 +68,15 @@ export function RecordsProvider({ children }) {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-    setRecords(loadRecords());
+    const loaded = loadRecordsData();
+    setRecords(loaded.records);
   }, []);
 
   const saveRecord = (record) => {
     setRecords((prev) => {
       const filtered = prev.filter((r) => r.duoKey !== record.duoKey);
       const updated = [...filtered, record];
-      saveRecordsToStorage(updated);
+      saveRecordsDataToStorage(updated);
       return updated;
     });
   };
@@ -43,9 +84,14 @@ export function RecordsProvider({ children }) {
   const deleteRecord = (duoKey) => {
     setRecords((prev) => {
       const updated = prev.filter((r) => r.duoKey !== duoKey);
-      saveRecordsToStorage(updated);
+      saveRecordsDataToStorage(updated);
       return updated;
     });
+  };
+
+  const importRecords = (nextRecords) => {
+    setRecords(nextRecords);
+    saveRecordsDataToStorage(nextRecords);
   };
 
   const getRecord = (duoKey) => {
@@ -63,6 +109,7 @@ export function RecordsProvider({ children }) {
         records,
         saveRecord,
         deleteRecord,
+        importRecords,
         getRecord,
         clearAllRecords
       }}

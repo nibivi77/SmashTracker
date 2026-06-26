@@ -23,80 +23,100 @@ export default function RecordCard({ record, onDelete }) {
   const duoRatio =
     totalTaken > 0 ? (totalDealt / totalTaken).toFixed(2) : "∞";
 
+  const savedAt = record.timestamp
+    ? new Date(record.timestamp).toLocaleString()
+    : "Imported before timestamps";
+
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "1rem",
-        borderRadius: "8px"
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          gap: "0.5rem",
-          alignItems: "center"
-        }}
-      >
-        {p1Char && (
-          <img
-            src={`${import.meta.env.BASE_URL}${p1Char.icon}`}
-            alt={p1Char.name}
-            style={{ width: "32px", height: "32px" }}
-          />
-        )}
-        <strong>Player 1:</strong> {p1Char?.name}
+    <div className="record-card">
+      <div className="record-card-top">
+        <div className="record-card-duo">
+          <div className="record-card-character">
+            {p1Char && (
+              <img
+                src={`${import.meta.env.BASE_URL}${p1Char.icon}`}
+                alt={p1Char.name}
+                className="record-card-character-icon"
+              />
+            )}
+            <div>
+              <div className="record-card-character-label">Player 1</div>
+              <strong>{p1Char?.name}</strong>
+            </div>
+          </div>
+
+          <div className="record-card-plus">+</div>
+
+          <div className="record-card-character">
+            {p2Char && (
+              <img
+                src={`${import.meta.env.BASE_URL}${p2Char.icon}`}
+                alt={p2Char.name}
+                className="record-card-character-icon"
+              />
+            )}
+            <div>
+              <div className="record-card-character-label">Player 2</div>
+              <strong>{p2Char?.name}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div className="ratio-badge ratio-badge-team">
+          Duo {duoRatio}
+        </div>
       </div>
 
-      <div>Damage Dealt: {record.p1DamageGiven}</div>
-      <div>Damage Taken: {record.p1DamageTaken}</div>
-      <div>
-        Ratio: <strong>{p1Ratio}</strong>
+      <div className="record-card-stats">
+        <div className="record-player-block record-player1">
+          <div className="record-player-header">
+            <strong>Player 1</strong>
+            <span className="ratio-badge ratio-badge-player">{p1Ratio}</span>
+          </div>
+
+          <div className="record-stat-line">
+            <span>Damage Given</span>
+            <strong>{record.p1DamageGiven}</strong>
+          </div>
+
+          <div className="record-stat-line">
+            <span>Damage Taken</span>
+            <strong>{record.p1DamageTaken}</strong>
+          </div>
+        </div>
+
+        <div className="record-player-block record-player2">
+          <div className="record-player-header">
+            <strong>Player 2</strong>
+            <span className="ratio-badge ratio-badge-player">{p2Ratio}</span>
+          </div>
+
+          <div className="record-stat-line">
+            <span>Damage Given</span>
+            <strong>{record.p2DamageGiven}</strong>
+          </div>
+
+          <div className="record-stat-line">
+            <span>Damage Taken</span>
+            <strong>{record.p2DamageTaken}</strong>
+          </div>
+        </div>
       </div>
 
-      <div
-        style={{
-          marginTop: "0.75rem",
-          display: "flex",
-          gap: "0.5rem",
-          alignItems: "center"
-        }}
-      >
-        {p2Char && (
-          <img
-            src={`${import.meta.env.BASE_URL}${p2Char.icon}`}
-            alt={p2Char.name}
-            style={{ width: "32px", height: "32px" }}
-          />
-        )}
-        <strong>Player 2:</strong> {p2Char?.name}
-      </div>
-
-      <div>Damage Dealt: {record.p2DamageGiven}</div>
-      <div>Damage Taken: {record.p2DamageTaken}</div>
-      <div>
-        Ratio: <strong>{p2Ratio}</strong>
-      </div>
-
-      <div style={{ marginTop: "0.75rem" }}>
-        <strong>Duo Ratio:</strong> {duoRatio}
+      <div className="record-card-meta">
+        <strong>Saved:</strong> {savedAt}
       </div>
 
       {onDelete && (
-        <button
-          onClick={() => onDelete(record.duoKey)}
-          style={{
-            marginTop: "0.75rem",
-            background: "red",
-            color: "white",
-            border: "none",
-            padding: "0.5rem 1rem",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >
-          Delete Record
-        </button>
+        <div className="record-card-actions">
+          <button
+            type="button"
+            className="danger-button"
+            onClick={() => onDelete(record.duoKey)}
+          >
+            Delete Record
+          </button>
+        </div>
       )}
     </div>
   );

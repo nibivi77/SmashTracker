@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { characters } from "../data/characters";
+import CharacterAutocomplete from "./CharacterAutocomplete";
 
-export default function PlayerEntry({ label, onChange }) {
+export default function PlayerEntry({ onChange }) {
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [damageTaken, setDamageTaken] = useState("");
   const [damageGiven, setDamageGiven] = useState("");
 
-  const filtered = characters.filter((c) =>
-    c.name.toLowerCase().includes(query.toLowerCase())
-  );
-
-  function handleSelect(character) {
-    setSelected(character);
+  function handleSelectCharacter(character) {
+    setSelectedCharacter(character);
     setQuery(character.name);
 
     onChange({
@@ -22,81 +18,47 @@ export default function PlayerEntry({ label, onChange }) {
     });
   }
 
-  function updateField(field, value) {
-    if (field === "taken") setDamageTaken(value);
-    if (field === "given") setDamageGiven(value);
+  function handleQueryChange(value) {
+    setQuery(value);
+    setSelectedCharacter(null);
 
     onChange({
-      characterId: selected?.id || null,
-      damageTaken: field === "taken" ? value : damageTaken,
-      damageGiven: field === "given" ? value : damageGiven
+      characterId: null,
+      damageTaken,
+      damageGiven
+    });
+  }
+
+  function updateField(field, value) {
+    const nextDamageTaken = field === "taken" ? value : damageTaken;
+    const nextDamageGiven = field === "given" ? value : damageGiven;
+
+    setDamageTaken(nextDamageTaken);
+    setDamageGiven(nextDamageGiven);
+
+    onChange({
+      characterId: selectedCharacter?.id || null,
+      damageTaken: nextDamageTaken,
+      damageGiven: nextDamageGiven
     });
   }
 
   return (
-    <fieldset style={{ marginBottom: "2rem" }}>
-      <legend>{label}</legend>
+    <section className="player-entry-panel">
+      <CharacterAutocomplete
+        label="Character"
+        placeholder="Search character..."
+        query={query}
+        selectedCharacter={selectedCharacter}
+        onQueryChange={handleQueryChange}
+        onSelectCharacter={handleSelectCharacter}
+      />
 
-      <label style={{ display: "block" }}>
-        Character
-        <input
-          type="text"
-          placeholder="Search character..."
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setSelected(null);
-          }}
-        />
-      </label>
-
-      {selected && (
-        <div
-          style={{
-            marginTop: "1rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem"
-          }}
-        >
-          <img
-            src={`${import.meta.env.BASE_URL}${selected.icon}`}
-            alt={selected.name}
-            style={{ width: "48px", height: "48px" }}
-          />
-          <strong>{selected.name}</strong>
-        </div>
-      )}
-
-      {query.length > 0 && !selected && (
-        <ul style={{ border: "1px solid #ccc", padding: "0.5rem" }}>
-          {filtered.map((char) => (
-            <li
-              key={char.name}
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.25rem 0"
-              }}
-              onClick={() => handleSelect(char)}
-            >
-              <img
-                src={`${import.meta.env.BASE_URL}${char.icon}`}
-                alt={char.name}
-                style={{ width: "32px", height: "32px", borderRadius: "4px" }}
-              />
-              {char.name}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div style={{ marginTop: "1rem" }}>
-        <label style={{ display: "block", marginBottom: "0.5rem" }}>
+      <div className="stat-input-grid">
+        <label className="field-label">
           Damage Given
           <input
+            className="text-input"
             type="number"
             min="1"
             value={damageGiven}
@@ -104,9 +66,10 @@ export default function PlayerEntry({ label, onChange }) {
           />
         </label>
 
-        <label style={{ display: "block" }}>
+        <label className="field-label">
           Damage Taken
           <input
+            className="text-input"
             type="number"
             min="1"
             value={damageTaken}
@@ -114,6 +77,6 @@ export default function PlayerEntry({ label, onChange }) {
           />
         </label>
       </div>
-    </fieldset>
+    </section>
   );
 }

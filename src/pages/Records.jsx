@@ -1,35 +1,53 @@
-import { useRecords } from "../context/RecordsContext";
-import RecordCard from "../components/RecordCard";
+import { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
+import PageContainer from "../components/PageContainer";
+import Panel from "../components/Panel";
+import { recordNavItems } from "../data/recordNavItems";
 
 export default function Records() {
-  const { records, deleteRecord } = useRecords();
-
-  if (records.length === 0) {
-    return (
-      <div>
-        <h2>Records</h2>
-        <p>No records saved yet.</p>
-      </div>
-    );
-  }
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div>
-      <h2>Records</h2>
-
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {records.map((record) => (
-          <li
-            key={record.duoKey}
-            style={{ marginBottom: "1rem" }}
+    <PageContainer title="Records">
+      <Panel title="Browse Records">
+        <div className="records-subnav-header">
+          <button
+            type="button"
+            className="subnav-toggle-button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-expanded={isMenuOpen}
+            aria-controls="records-subnav-menu"
           >
-            <RecordCard
-              record={record}
-              onDelete={deleteRecord}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
+            <span className="hamburger-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span>{isMenuOpen ? "Close Menu" : "Open Sub-Pages"}</span>
+          </button>
+        </div>
+
+        <nav
+          id="records-subnav-menu"
+          className={isMenuOpen ? "sub-nav sub-nav-open" : "sub-nav"}
+        >
+          {recordNavItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.end}
+              className={({ isActive }) =>
+                isActive ? "sub-nav-link active" : "sub-nav-link"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </Panel>
+
+      <Outlet />
+    </PageContainer>
   );
 }

@@ -1,12 +1,35 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header>
-      <nav>
-        <Link to="/new">New Record</Link>
-        {' '}
-        <Link to="/records">Records</Link>
+    <header className="app-header">
+      <nav className="primary-nav">
+        <NavLink
+          to="/new"
+          className={({ isActive }) =>
+            isActive ? "primary-nav-link active" : "primary-nav-link"
+          }
+        >
+          New Record
+        </NavLink>
+
+        <NavLink
+          to="/records"
+          className={({ isActive }) =>
+            isActive ? "primary-nav-link active" : "primary-nav-link"
+          }
+        >
+          Records
+        </NavLink>
+
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            isActive ? "primary-nav-link active" : "primary-nav-link"
+          }
+        >
+          Settings
+        </NavLink>
       </nav>
     </header>
   );

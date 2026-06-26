@@ -1,4 +1,6 @@
-[
+{
+  "version": 1,
+  "records":[
   {
     "duoKey": "king-dedede_diddy-kong",
     "p1Character": "king-dedede",
@@ -657,3 +659,4 @@
     "p2DamageTaken": 80
   }
 ]
+}

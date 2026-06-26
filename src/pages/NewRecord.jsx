@@ -1,6 +1,9 @@
 import { useState } from "react";
 import PlayerEntry from "../components/PlayerEntry";
 import RecordCard from "../components/RecordCard";
+import PageContainer from "../components/PageContainer";
+import Panel from "../components/Panel";
+import MessageBanner from "../components/MessageBanner";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
@@ -10,6 +13,7 @@ export default function NewRecord() {
   const [player2, setPlayer2] = useState({});
   const [lastSavedRecord, setLastSavedRecord] = useState(null);
   const [saveMessage, setSaveMessage] = useState("");
+  const [messageTone, setMessageTone] = useState("info");
 
   const { saveRecord, getRecord, clearAllRecords } = useRecords();
 
@@ -45,65 +49,92 @@ export default function NewRecord() {
   }
 
   function handleSubmit(event) {
-  event.preventDefault();
-  const validationError = validateRecordInput(player1, player2);
-  if (validationError) {
-    setSaveMessage(validationError);
-    return;
+    event.preventDefault();
+
+    const validationError = validateRecordInput(player1, player2);
+
+    if (validationError) {
+      setMessageTone("error");
+      setSaveMessage(validationError);
+      return;
+    }
+
+    const record = {
+      duoKey: createDuoKey(player1.characterId, player2.characterId),
+      p1Character: player1.characterId,
+      p2Character: player2.characterId,
+      p1DamageGiven: Number(player1.damageGiven),
+      p1DamageTaken: Number(player1.damageTaken),
+      p2DamageGiven: Number(player2.damageGiven),
+      p2DamageTaken: Number(player2.damageTaken),
+      timestamp: Date.now()
+    };
+
+    const existing = getRecord(record.duoKey);
+
+    if (!existing) {
+      saveRecord(record);
+      setLastSavedRecord(record);
+      setMessageTone("success");
+      setSaveMessage("New record saved.");
+      return;
+    }
+
+    const currentRatio = getTeamRatio(existing);
+    const newRatio = getTeamRatio(record);
+
+    if (newRatio > currentRatio) {
+      saveRecord(record);
+      setLastSavedRecord(record);
+      setMessageTone("success");
+      setSaveMessage("Record updated.");
+    } else {
+      setMessageTone("info");
+      setSaveMessage("Record not saved. Existing duo record is still better.");
+    }
   }
-  const record = {
-    duoKey: createDuoKey(player1.characterId, player2.characterId),
-    p1Character: player1.characterId,
-    p2Character: player2.characterId,
-    p1DamageGiven: Number(player1.damageGiven),
-    p1DamageTaken: Number(player1.damageTaken),
-    p2DamageGiven: Number(player2.damageGiven),
-    p2DamageTaken: Number(player2.damageTaken),
-    timestamp: Date.now()
-  };
-  const existing = getRecord(record.duoKey);
-  if (!existing) {
-    saveRecord(record);
-    setLastSavedRecord(record);
-    setSaveMessage("New record saved.");
-    return;
-  }
-  const currentRatio = getTeamRatio(existing);
-  const newRatio = getTeamRatio(record);
-  if (newRatio >= currentRatio) {
-    saveRecord(record);
-    setLastSavedRecord(record);
-    setSaveMessage("Record updated.");
-  } else {
-    setSaveMessage("Record not saved. Existing duo record is still better.");
-  }
-}
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>New Record</h2>
-
-      <PlayerEntry label="Player 1" onChange={setPlayer1} />
-      <PlayerEntry label="Player 2" onChange={setPlayer2} />
-
-      <button type="submit">Save Record</button>
-
-      <button type="button" onClick={clearAllRecords}>
-        Clear All Records
-      </button>
-
-      {saveMessage && (
-        <p style={{ marginTop: "1rem" }}>
-          <strong>{saveMessage}</strong>
+    <PageContainer title="New Record">
+      <div className="hero-banner">
+        <div className="hero-badge">Smash Duo Tracker</div>
+        <h3 className="hero-title">Track your best bot-battle duo records</h3>
+        <p className="hero-text">
+          Enter both characters, add the damage stats, and save only if the duo beats its old best ratio.
         </p>
-      )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="page-form">
+        <Panel title="Player 1">
+          <PlayerEntry onChange={setPlayer1} />
+        </Panel>
+
+        <Panel title="Player 2">
+          <PlayerEntry onChange={setPlayer2} />
+        </Panel>
+
+        <div className="form-actions sticky-action-bar">
+          <button type="submit" className="primary-button">
+            Save Record
+          </button>
+
+          <button
+            type="button"
+            className="secondary-button"
+            onClick={clearAllRecords}
+          >
+            Clear All Records
+          </button>
+        </div>
+
+        <MessageBanner message={saveMessage} tone={messageTone} />
+      </form>
 
       {lastSavedRecord && (
-        <div style={{ marginTop: "1.5rem" }}>
-          <h3>Last Saved Record</h3>
+        <Panel title="Last Saved Record">
           <RecordCard record={lastSavedRecord} />
-        </div>
+        </Panel>
       )}
-    </form>
+    </PageContainer>
   );
 }
