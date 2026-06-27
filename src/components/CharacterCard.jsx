@@ -1,6 +1,10 @@
+import { useId, useState } from "react";
 import { characters } from "../data/characters";
 
 export default function CharacterCard({ performance, rankLabel }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
+
   const character = characters.find((c) => c.id === performance.characterId);
   const partner = characters.find((c) => c.id === performance.partnerCharacterId);
 
@@ -14,8 +18,14 @@ export default function CharacterCard({ performance, rankLabel }) {
     : "Imported before timestamps";
 
   return (
-    <div className="character-card">
-      <div className="character-card-top">
+    <div className={`character-card accordion-card ${isOpen ? "expanded" : ""}`}>
+      <button
+        type="button"
+        className="accordion-trigger character-card-summary"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+      >
         <div className="character-card-header">
           {character && (
             <img
@@ -30,40 +40,54 @@ export default function CharacterCard({ performance, rankLabel }) {
               <strong>{character?.name}</strong>
               {rankLabel && <span className="inline-rank-label">{rankLabel}</span>}
             </div>
+
             <div className="character-card-role">
               {performance.playerSlot === "p1" ? "Player 1" : "Player 2"}
             </div>
           </div>
         </div>
 
-        <div className="ratio-badge ratio-badge-player">
-          {ratio}
-        </div>
-      </div>
+        <div className="accordion-header-right">
+          <div className="ratio-badge ratio-badge-player">
+            {ratio}
+          </div>
 
-      <div className="character-card-stats">
-        <div className="character-stat-line">
-          <span>Damage Given</span>
-          <strong>{performance.damageGiven}</strong>
+          <span className="accordion-arrow" aria-hidden="true">
+            ▾
+          </span>
         </div>
+      </button>
 
-        <div className="character-stat-line">
-          <span>Damage Taken</span>
-          <strong>{performance.damageTaken}</strong>
-        </div>
+      <div
+        id={contentId}
+        className="accordion-content"
+      >
+        <div className="accordion-content-inner">
+          <div className="character-card-stats">
+            <div className="character-stat-line">
+              <span>Damage Given</span>
+              <strong>{performance.damageGiven}</strong>
+            </div>
 
-        <div className="character-stat-line">
-          <span>Partner</span>
-          <strong>{partner?.name}</strong>
-        </div>
-      </div>
+            <div className="character-stat-line">
+              <span>Damage Taken</span>
+              <strong>{performance.damageTaken}</strong>
+            </div>
 
-      <div className="character-card-meta">
-        <div>
-          <strong>Duo:</strong> {performance.duoKey}
-        </div>
-        <div>
-          <strong>Saved:</strong> {savedAt}
+            <div className="character-stat-line">
+              <span>Partner</span>
+              <strong>{partner?.name}</strong>
+            </div>
+          </div>
+
+          <div className="character-card-meta">
+            <div>
+              <strong>Duo:</strong> {performance.duoKey}
+            </div>
+            <div>
+              <strong>Saved:</strong> {savedAt}
+            </div>
+          </div>
         </div>
       </div>
     </div>

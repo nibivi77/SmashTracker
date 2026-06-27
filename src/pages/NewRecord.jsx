@@ -7,6 +7,8 @@ import MessageBanner from "../components/MessageBanner";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
+import { SHOW_CLEAR_ALL_RECORDS } from "../config/devFlags";
+
 
 export default function NewRecord() {
   const [player1, setPlayer1] = useState({});
@@ -96,14 +98,6 @@ export default function NewRecord() {
 
   return (
     <PageContainer title="New Record">
-      <div className="hero-banner">
-        <div className="hero-badge">Smash Duo Tracker</div>
-        <h3 className="hero-title">Track your best bot-battle duo records</h3>
-        <p className="hero-text">
-          Enter both characters, add the damage stats, and save only if the duo beats its old best ratio.
-        </p>
-      </div>
-
       <form onSubmit={handleSubmit} className="page-form">
         <Panel title="Player 1">
           <PlayerEntry onChange={setPlayer1} />
@@ -113,18 +107,20 @@ export default function NewRecord() {
           <PlayerEntry onChange={setPlayer2} />
         </Panel>
 
-        <div className="form-actions sticky-action-bar">
+        <div className="form-actions form-action-bar">
           <button type="submit" className="primary-button">
             Save Record
           </button>
 
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={clearAllRecords}
-          >
-            Clear All Records
-          </button>
+          {SHOW_CLEAR_ALL_RECORDS && (
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={clearAllRecords}
+            >
+              Clear All Records
+            </button>
+          )}
         </div>
 
         <MessageBanner message={saveMessage} tone={messageTone} />

@@ -1,6 +1,10 @@
+import { useId, useState } from "react";
 import { characters } from "../data/characters";
 
 export default function RecordCard({ record, onDelete }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
+
   const p1Char = characters.find((c) => c.id === record.p1Character);
   const p2Char = characters.find((c) => c.id === record.p2Character);
 
@@ -28,8 +32,14 @@ export default function RecordCard({ record, onDelete }) {
     : "Imported before timestamps";
 
   return (
-    <div className="record-card">
-      <div className="record-card-top">
+    <div className={`record-card accordion-card ${isOpen ? "expanded" : ""}`}>
+      <button
+        type="button"
+        className="accordion-trigger record-card-summary"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+      >
         <div className="record-card-duo">
           <div className="record-card-character">
             {p1Char && (
@@ -39,10 +49,7 @@ export default function RecordCard({ record, onDelete }) {
                 className="record-card-character-icon"
               />
             )}
-            <div>
-              <div className="record-card-character-label">Player 1</div>
-              <strong>{p1Char?.name}</strong>
-            </div>
+            <strong>{p1Char?.name}</strong>
           </div>
 
           <div className="record-card-plus">+</div>
@@ -55,69 +62,79 @@ export default function RecordCard({ record, onDelete }) {
                 className="record-card-character-icon"
               />
             )}
-            <div>
-              <div className="record-card-character-label">Player 2</div>
-              <strong>{p2Char?.name}</strong>
+            <strong>{p2Char?.name}</strong>
+          </div>
+        </div>
+
+        <div className="accordion-header-right">
+          <div className="ratio-badge ratio-badge-team">
+            Duo {duoRatio}
+          </div>
+
+          <span className="accordion-arrow" aria-hidden="true">
+            ▾
+          </span>
+        </div>
+      </button>
+
+      <div
+        id={contentId}
+        className="accordion-content"
+      >
+        <div className="accordion-content-inner">
+          <div className="record-card-stats">
+            <div className="record-player-block record-player1">
+              <div className="record-player-header">
+                <strong>Player 1</strong>
+                <span className="ratio-badge ratio-badge-player">{p1Ratio}</span>
+              </div>
+
+              <div className="record-stat-line">
+                <span>Damage Given</span>
+                <strong>{record.p1DamageGiven}</strong>
+              </div>
+
+              <div className="record-stat-line">
+                <span>Damage Taken</span>
+                <strong>{record.p1DamageTaken}</strong>
+              </div>
+            </div>
+
+            <div className="record-player-block record-player2">
+              <div className="record-player-header">
+                <strong>Player 2</strong>
+                <span className="ratio-badge ratio-badge-player">{p2Ratio}</span>
+              </div>
+
+              <div className="record-stat-line">
+                <span>Damage Given</span>
+                <strong>{record.p2DamageGiven}</strong>
+              </div>
+
+              <div className="record-stat-line">
+                <span>Damage Taken</span>
+                <strong>{record.p2DamageTaken}</strong>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="ratio-badge ratio-badge-team">
-          Duo {duoRatio}
-        </div>
-      </div>
-
-      <div className="record-card-stats">
-        <div className="record-player-block record-player1">
-          <div className="record-player-header">
-            <strong>Player 1</strong>
-            <span className="ratio-badge ratio-badge-player">{p1Ratio}</span>
+          <div className="record-card-meta">
+            <strong>Saved:</strong> {savedAt}
           </div>
 
-          <div className="record-stat-line">
-            <span>Damage Given</span>
-            <strong>{record.p1DamageGiven}</strong>
-          </div>
-
-          <div className="record-stat-line">
-            <span>Damage Taken</span>
-            <strong>{record.p1DamageTaken}</strong>
-          </div>
-        </div>
-
-        <div className="record-player-block record-player2">
-          <div className="record-player-header">
-            <strong>Player 2</strong>
-            <span className="ratio-badge ratio-badge-player">{p2Ratio}</span>
-          </div>
-
-          <div className="record-stat-line">
-            <span>Damage Given</span>
-            <strong>{record.p2DamageGiven}</strong>
-          </div>
-
-          <div className="record-stat-line">
-            <span>Damage Taken</span>
-            <strong>{record.p2DamageTaken}</strong>
-          </div>
+          {onDelete && (
+            <div className="record-card-actions">
+              <button
+                type="button"
+                className="danger-button"
+                onClick={() => onDelete(record.duoKey)}
+              >
+                Delete Record
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      <div className="record-card-meta">
-        <strong>Saved:</strong> {savedAt}
-      </div>
-
-      {onDelete && (
-        <div className="record-card-actions">
-          <button
-            type="button"
-            className="danger-button"
-            onClick={() => onDelete(record.duoKey)}
-          >
-            Delete Record
-          </button>
-        </div>
-      )}
     </div>
   );
 }

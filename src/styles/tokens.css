@@ -62,7 +62,6 @@
   --input-text: #f9f6ff;
   --panel-highlight: rgba(255, 255, 255, 0.04);
   --card-gradient: linear-gradient(180deg, #34294d 0%, #2a223d 100%);
-  --hero-gradient: linear-gradient(135deg, #40305d 0%, #5a3550 55%, #21364f 100%);
   --preview-bg: #263b48;
   --autocomplete-option-bg: #3b3155;
   --autocomplete-option-hover: #4a3f69;
@@ -107,7 +106,6 @@
   --input-text: #2b2540;
   --panel-highlight: rgba(255, 255, 255, 0.55);
   --card-gradient: linear-gradient(180deg, #ffffff 0%, #fff8e8 100%);
-  --hero-gradient: linear-gradient(135deg, #fff5ce 0%, #ffd7e0 55%, #d9f3ff 100%);
   --preview-bg: #eefbff;
   --autocomplete-option-bg: #fff7d6;
   --autocomplete-option-hover: #ffefb0;
