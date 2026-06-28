@@ -1,1 +1,2 @@
-export const SHOW_CLEAR_ALL_RECORDS = false;
+export const ENABLE_RECORD_DELETION_ACTIONS
+ = false;

@@ -1,5 +1,7 @@
 import { useId, useState } from "react";
 import { characters } from "../data/characters";
+import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
+
 
 export default function RecordCard({ record, onDelete }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -122,17 +124,18 @@ export default function RecordCard({ record, onDelete }) {
             <strong>Saved:</strong> {savedAt}
           </div>
 
-          {onDelete && (
-            <div className="record-card-actions">
-              <button
-                type="button"
-                className="danger-button"
-                onClick={() => onDelete(record.duoKey)}
-              >
-                Delete Record
-              </button>
-            </div>
-          )}
+          {onDelete && ENABLE_RECORD_DELETION_ACTIONS
+ && (
+  <div className="record-card-actions">
+    <button
+      type="button"
+      className="danger-button"
+      onClick={() => onDelete(record.duoKey)}
+    >
+      Delete Record
+    </button>
+  </div>
+)}
         </div>
       </div>
     </div>

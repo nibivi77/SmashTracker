@@ -7,7 +7,8 @@ import MessageBanner from "../components/MessageBanner";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
-import { SHOW_CLEAR_ALL_RECORDS } from "../config/devFlags";
+import { ENABLE_RECORD_DELETION_ACTIONS
+ } from "../config/devFlags";
 
 
 export default function NewRecord() {
@@ -112,7 +113,8 @@ export default function NewRecord() {
             Save Record
           </button>
 
-          {SHOW_CLEAR_ALL_RECORDS && (
+          {ENABLE_RECORD_DELETION_ACTIONS
+ && (
             <button
               type="button"
               className="secondary-button"

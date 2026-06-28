@@ -652,9 +652,9 @@ list-style: none;
 .record-card-summary,
 .character-card-summary {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
 }
 
 .record-card-summary .record-card-duo,
@@ -663,30 +663,78 @@ list-style: none;
   min-width: 0;
 }
 
-.record-card-summary .record-card-character strong,
-.character-card-summary .character-card-name-row strong {
+.record-card-character,
+.character-card-header {
+  align-items: flex-start;
+}
+
+.record-card-character-icon,
+.character-card-icon {
+  flex-shrink: 0;
+}
+
+.record-card-character strong,
+.character-card-name-row strong {
   overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.record-card-duo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  flex-wrap: nowrap;
+}
+
+.record-card-plus {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.accordion-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  flex-shrink: 0;
 }
 
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .record-card-summary,
   .character-card-summary {
-    align-items: flex-start;
-  }
-
-  .accordion-header-right {
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: stretch;
   }
 
   .record-card-duo {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-2);
   }
 
   .record-card-plus {
     display: none;
+  }
+
+  .accordion-header-right {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 521px) {
+  .record-card-summary,
+  .character-card-summary {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .record-card-duo {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -700,8 +748,7 @@ list-style: none;
 
 .record-card-duo {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
@@ -728,7 +775,7 @@ list-style: none;
 .record-card-stats {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 .record-player-block {
@@ -891,11 +938,6 @@ list-style: none;
     align-items: center;
     justify-content: space-between;
   }
-
-  .record-card-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
 
 @media (min-width: 900px) {
   .page-container {
