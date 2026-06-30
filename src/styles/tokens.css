@@ -30,48 +30,50 @@
 }
 
 :root[data-theme="dark"] {
-  --color-bg: #161320;
-  --color-bg-accent: #221b35;
-  --color-surface: #2a223d;
-  --color-surface-soft: #352b4d;
+  --color-bg: #0f111a;
+  --color-bg-accent: #1a1f2b;
+  --color-surface: #1c2230;
+  --color-surface-soft: #273043;
 
-  --color-text: #f9f6ff;
-  --color-text-soft: #c9c1db;
-  --color-border: #120f1d;
+  --color-text: #f5f7ff;
+  --color-text-soft: #b8c0d4;
+  --color-text-on-bright: #1a1a1a;
+  --color-border: #07090f;
 
-  --color-primary: #ff5a7a;
-  --color-primary-dark: #e64568;
+  --color-primary: #e60012;
+  --color-primary-dark: #b8000e;
   --color-secondary: #ffd54a;
   --color-secondary-dark: #f4c318;
-  --color-accent: #53c8ff;
-  --color-accent-dark: #2ab3f0;
+  --color-accent: #4db8ff;
+  --color-accent-dark: #249fe8;
   --color-success: #59c36a;
   --color-success-dark: #40ad52;
-  --color-error: #ff7b7b;
-  --color-error-dark: #ea5f5f;
+  --color-error: #ff6b6b;
+  --color-error-dark: #e65252;
   --color-info: #7c8cff;
   --color-info-dark: #6576f3;
 
-  --shadow-card: 0 6px 0 rgba(0, 0, 0, 0.55);
-  --shadow-button: 0 4px 0 rgba(0, 0, 0, 0.55);
-  --shadow-pressed: 0 2px 0 rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 6px 0 rgba(0, 0, 0, 0.6);
+  --shadow-button: 0 4px 0 rgba(0, 0, 0, 0.6);
+  --shadow-pressed: 0 2px 0 rgba(0, 0, 0, 0.6);
 
   --gradient-body:
-    radial-gradient(circle at top left, #2d2442 0%, #161320 45%, #0f1220 100%);
-  --input-bg: #1f1930;
-  --input-text: #f9f6ff;
-  --panel-highlight: rgba(255, 255, 255, 0.04);
-  --card-gradient: linear-gradient(180deg, #34294d 0%, #2a223d 100%);
-  --preview-bg: #263b48;
-  --autocomplete-option-bg: #3b3155;
-  --autocomplete-option-hover: #4a3f69;
-  --player1-bg: #24384c;
-  --player2-bg: #4a3924;
-  --banner-success: #214b2a;
-  --banner-error: #5a2424;
-  --banner-info: #27345c;
-  --empty-bg: #302642;
+    radial-gradient(circle at top left, #20273a 0%, #0f111a 50%, #090b11 100%);
+  --input-bg: #111722;
+  --input-text: #f5f7ff;
+  --panel-highlight: rgba(255, 255, 255, 0.03);
+  --card-gradient: linear-gradient(180deg, #232a39 0%, #1a202d 100%);
+  --preview-bg: #1b3142;
+  --autocomplete-option-bg: #2a3448;
+  --autocomplete-option-hover: #38455d;
+  --player1-bg: #1a3347;
+  --player2-bg: #45351a;
+  --banner-success: #193c24;
+  --banner-error: #4a1f24;
+  --banner-info: #202f57;
+  --empty-bg: #222938;
 }
+
 
 :root[data-theme="light"] {
   --color-bg: #f7f4ff;
@@ -81,6 +83,7 @@
 
   --color-text: #2b2540;
   --color-text-soft: #5e5873;
+  --color-text-on-bright: #1a1a1a;
   --color-border: #2b2540;
 
 --color-primary: #e60012;
