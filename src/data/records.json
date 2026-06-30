@@ -1,662 +1,705 @@
 {
   "version": 1,
-  "records":[
-  {
-    "duoKey": "king-dedede_diddy-kong",
-    "p1Character": "king-dedede",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 441,
-    "p1DamageTaken": 244,
-    "p2DamageGiven": 489,
-    "p2DamageTaken": 159
-  },
-  {
-    "duoKey": "pikachu_kirby",
-    "p1Character": "pikachu",
-    "p2Character": "kirby",
-    "p1DamageGiven": 284,
-    "p1DamageTaken": 89,
-    "p2DamageGiven": 307,
-    "p2DamageTaken": 175
-  },
-  {
-    "duoKey": "young-link_marth",
-    "p1Character": "young-link",
-    "p2Character": "marth",
-    "p1DamageGiven": 589,
-    "p1DamageTaken": 220,
-    "p2DamageGiven": 588,
-    "p2DamageTaken": 257
-  },
-  {
-    "duoKey": "ganondorf_diddy-kong",
-    "p1Character": "ganondorf",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 523,
-    "p1DamageTaken": 134,
-    "p2DamageGiven": 179,
-    "p2DamageTaken": 89
-  },
-  {
-    "duoKey": "ganondorf_bowser",
-    "p1Character": "ganondorf",
-    "p2Character": "bowser",
-    "p1DamageGiven": 334,
-    "p1DamageTaken": 42,
-    "p2DamageGiven": 269,
-    "p2DamageTaken": 78
-  },
-  {
-    "duoKey": "ganondorf_ridley",
-    "p1Character": "ganondorf",
-    "p2Character": "ridley",
-    "p1DamageGiven": 437,
-    "p1DamageTaken": 84,
-    "p2DamageGiven": 399,
-    "p2DamageTaken": 197
-  },
-  {
-    "duoKey": "captain-falcon_kirby",
-    "p1Character": "captain-falcon",
-    "p2Character": "kirby",
-    "p1DamageGiven": 449,
-    "p1DamageTaken": 292,
-    "p2DamageGiven": 507,
-    "p2DamageTaken": 283
-  },
-  {
-    "duoKey": "young-link_lucas",
-    "p1Character": "young-link",
-    "p2Character": "lucas",
-    "p1DamageGiven": 482,
-    "p1DamageTaken": 114,
-    "p2DamageGiven": 356,
-    "p2DamageTaken": 144
-  },
-  {
-    "duoKey": "king-dedede_lucas",
-    "p1Character": "king-dedede",
-    "p2Character": "lucas",
-    "p1DamageGiven": 405,
-    "p1DamageTaken": 265,
-    "p2DamageGiven": 290,
-    "p2DamageTaken": 177
-  },
-  {
-    "duoKey": "young-link_captain-falcon",
-    "p1Character": "young-link",
-    "p2Character": "captain-falcon",
-    "p1DamageGiven": 593,
-    "p1DamageTaken": 308,
-    "p2DamageGiven": 606,
-    "p2DamageTaken": 328
-  },
-  {
-    "duoKey": "donkey-kong_lucas",
-    "p1Character": "donkey-kong",
-    "p2Character": "lucas",
-    "p1DamageGiven": 433,
-    "p1DamageTaken": 177,
-    "p2DamageGiven": 378,
-    "p2DamageTaken": 135
-  },
-  {
-    "duoKey": "king-dedede_captain-falcon",
-    "p1Character": "king-dedede",
-    "p2Character": "captain-falcon",
-    "p1DamageGiven": 421,
-    "p1DamageTaken": 199,
-    "p2DamageGiven": 378,
-    "p2DamageTaken": 154
-  },
-  {
-    "duoKey": "link_ridley",
-    "p1Character": "link",
-    "p2Character": "ridley",
-    "p1DamageGiven": 321,
-    "p1DamageTaken": 151,
-    "p2DamageGiven": 467,
-    "p2DamageTaken": 265
-  },
-  {
-    "duoKey": "king-k-rool_lucas",
-    "p1Character": "king-k-rool",
-    "p2Character": "lucas",
-    "p1DamageGiven": 362,
-    "p1DamageTaken": 166,
-    "p2DamageGiven": 390,
-    "p2DamageTaken": 182
-  },
-  {
-    "duoKey": "young-link_ridley",
-    "p1Character": "young-link",
-    "p2Character": "ridley",
-    "p1DamageGiven": 373,
-    "p1DamageTaken": 155,
-    "p2DamageGiven": 597,
-    "p2DamageTaken": 209
-  },
-  {
-    "duoKey": "king-dedede_ridley",
-    "p1Character": "king-dedede",
-    "p2Character": "ridley",
-    "p1DamageGiven": 306,
-    "p1DamageTaken": 94,
-    "p2DamageGiven": 315,
-    "p2DamageTaken": 122
-  },
-  {
-    "duoKey": "ganondorf_captain-falcon",
-    "p1Character": "ganondorf",
-    "p2Character": "captain-falcon",
-    "p1DamageGiven": 418,
-    "p1DamageTaken": 208,
-    "p2DamageGiven": 354,
-    "p2DamageTaken": 169
-  },
-  {
-    "duoKey": "ike_bowser",
-    "p1Character": "ike",
-    "p2Character": "bowser",
-    "p1DamageGiven": 233,
-    "p1DamageTaken": 159,
-    "p2DamageGiven": 516,
-    "p2DamageTaken": 191
-  },
-  {
-    "duoKey": "king-k-rool_kirby",
-    "p1Character": "king-k-rool",
-    "p2Character": "kirby",
-    "p1DamageGiven": 636,
-    "p1DamageTaken": 133,
-    "p2DamageGiven": 323,
-    "p2DamageTaken": 124
-  },
-  {
-    "duoKey": "young-link_kirby",
-    "p1Character": "young-link",
-    "p2Character": "kirby",
-    "p1DamageGiven": 369,
-    "p1DamageTaken": 168,
-    "p2DamageGiven": 567,
-    "p2DamageTaken": 158
-  },
-  {
-    "duoKey": "king-k-rool_diddy-kong",
-    "p1Character": "king-k-rool",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 652,
-    "p1DamageTaken": 196,
-    "p2DamageGiven": 337,
-    "p2DamageTaken": 257
-  },
-  {
-    "duoKey": "donkey-kong_kirby",
-    "p1Character": "donkey-kong",
-    "p2Character": "kirby",
-    "p1DamageGiven": 569,
-    "p1DamageTaken": 261,
-    "p2DamageGiven": 546,
-    "p2DamageTaken": 188
-  },
-  {
-    "duoKey": "captain-falcon_bowser",
-    "p1Character": "captain-falcon",
-    "p2Character": "bowser",
-    "p1DamageGiven": 239,
-    "p1DamageTaken": 97,
-    "p2DamageGiven": 428,
-    "p2DamageTaken": 99
-  },
-  {
-    "duoKey": "donkey-kong_ridley",
-    "p1Character": "donkey-kong",
-    "p2Character": "ridley",
-    "p1DamageGiven": 419,
-    "p1DamageTaken": 195,
-    "p2DamageGiven": 457,
-    "p2DamageTaken": 151
-  },
-  {
-    "duoKey": "pokemon-trainer_diddy-kong",
-    "p1Character": "pokemon-trainer",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 424,
-    "p1DamageTaken": 160,
-    "p2DamageGiven": 370,
-    "p2DamageTaken": 184
-  },
-  {
-    "duoKey": "captain-falcon_captain-falcon",
-    "p1Character": "captain-falcon",
-    "p2Character": "captain-falcon",
-    "p1DamageGiven": 315,
-    "p1DamageTaken": 68,
-    "p2DamageGiven": 401,
-    "p2DamageTaken": 90
-  },
-  {
-    "duoKey": "king-dedede_simon",
-    "p1Character": "king-dedede",
-    "p2Character": "simon",
-    "p1DamageGiven": 265,
-    "p1DamageTaken": 167,
-    "p2DamageGiven": 381,
-    "p2DamageTaken": 42
-  },
-  {
-    "duoKey": "king-dedede_bowser",
-    "p1Character": "king-dedede",
-    "p2Character": "bowser",
-    "p1DamageGiven": 290,
-    "p1DamageTaken": 87,
-    "p2DamageGiven": 371,
-    "p2DamageTaken": 137
-  },
-  {
-    "duoKey": "hero_roy",
-    "p1Character": "hero",
-    "p2Character": "roy",
-    "p1DamageGiven": 390,
-    "p1DamageTaken": 132,
-    "p2DamageGiven": 316,
-    "p2DamageTaken": 163
-  },
-  {
-    "duoKey": "donkey-kong_simon",
-    "p1Character": "donkey-kong",
-    "p2Character": "simon",
-    "p1DamageGiven": 378,
-    "p1DamageTaken": 166,
-    "p2DamageGiven": 377,
-    "p2DamageTaken": 99
-  },
-  {
-    "duoKey": "ganondorf_kirby",
-    "p1Character": "ganondorf",
-    "p2Character": "kirby",
-    "p1DamageGiven": 445,
-    "p1DamageTaken": 108,
-    "p2DamageGiven": 242,
-    "p2DamageTaken": 76
-  },
-  {
-    "duoKey": "bowser_donkey-kong",
-    "p1Character": "bowser",
-    "p2Character": "donkey-kong",
-    "p1DamageGiven": 447,
-    "p1DamageTaken": 140,
-    "p2DamageGiven": 338,
-    "p2DamageTaken": 155
-  },
-  {
-    "duoKey": "byleth_roy",
-    "p1Character": "byleth",
-    "p2Character": "roy",
-    "p1DamageGiven": 439,
-    "p1DamageTaken": 110,
-    "p2DamageGiven": 394,
-    "p2DamageTaken": 122
-  },
-  {
-    "duoKey": "king-k-rool_roy",
-    "p1Character": "king-k-rool",
-    "p2Character": "roy",
-    "p1DamageGiven": 426,
-    "p1DamageTaken": 166,
-    "p2DamageGiven": 470,
-    "p2DamageTaken": 122
-  },
-  {
-    "duoKey": "donkey-kong_donkey-kong",
-    "p1Character": "donkey-kong",
-    "p2Character": "donkey-kong",
-    "p1DamageGiven": 500,
-    "p1DamageTaken": 157,
-    "p2DamageGiven": 314,
-    "p2DamageTaken": 117
-  },
-  {
-    "duoKey": "king-k-rool_simon",
-    "p1Character": "king-k-rool",
-    "p2Character": "simon",
-    "p1DamageGiven": 440,
-    "p1DamageTaken": 254,
-    "p2DamageGiven": 381,
-    "p2DamageTaken": 74
-  },
-  {
-    "duoKey": "bowser_kirby",
-    "p1Character": "bowser",
-    "p2Character": "kirby",
-    "p1DamageGiven": 404,
-    "p1DamageTaken": 162,
-    "p2DamageGiven": 315,
-    "p2DamageTaken": 117
-  },
-  {
-    "duoKey": "young-link_roy",
-    "p1Character": "young-link",
-    "p2Character": "roy",
-    "p1DamageGiven": 382,
-    "p1DamageTaken": 92,
-    "p2DamageGiven": 407,
-    "p2DamageTaken": 140
-  },
-  {
-    "duoKey": "king-k-rool_donkey-kong",
-    "p1Character": "king-k-rool",
-    "p2Character": "donkey-kong",
-    "p1DamageGiven": 362,
-    "p1DamageTaken": 80,
-    "p2DamageGiven": 436,
-    "p2DamageTaken": 110
-  },
-  {
-    "duoKey": "ganondorf_ganondorf",
-    "p1Character": "ganondorf",
-    "p2Character": "ganondorf",
-    "p1DamageGiven": 519,
-    "p1DamageTaken": 79,
-    "p2DamageGiven": 295,
-    "p2DamageTaken": 111
-  },
-  {
-    "duoKey": "hero_roy",
-    "p1Character": "hero",
-    "p2Character": "roy",
-    "p1DamageGiven": 296,
-    "p1DamageTaken": 126,
-    "p2DamageGiven": 442,
-    "p2DamageTaken": 87
-  },
-  {
-    "duoKey": "ike_ridley",
-    "p1Character": "ike",
-    "p2Character": "ridley",
-    "p1DamageGiven": 376,
-    "p1DamageTaken": 168,
-    "p2DamageGiven": 452,
-    "p2DamageTaken": 222
-  },
-  {
-    "duoKey": "ganondorf_bowser",
-    "p1Character": "ganondorf",
-    "p2Character": "bowser",
-    "p1DamageGiven": 365,
-    "p1DamageTaken": 59,
-    "p2DamageGiven": 330,
-    "p2DamageTaken": 69
-  },
-  {
-    "duoKey": "simon_richter",
-    "p1Character": "simon",
-    "p2Character": "richter",
-    "p1DamageGiven": 505,
-    "p1DamageTaken": 131,
-    "p2DamageGiven": 362,
-    "p2DamageTaken": 140
-  },
-  {
-    "duoKey": "roy_byleth",
-    "p1Character": "roy",
-    "p2Character": "byleth",
-    "p1DamageGiven": 255,
-    "p1DamageTaken": 89,
-    "p2DamageGiven": 400,
-    "p2DamageTaken": 77
-  },
-  {
-    "duoKey": "dark-samus_roy",
-    "p1Character": "dark-samus",
-    "p2Character": "roy",
-    "p1DamageGiven": 257,
-    "p1DamageTaken": 78,
-    "p2DamageGiven": 281,
-    "p2DamageTaken": 107
-  },
-  {
-    "duoKey": "byleth_simon",
-    "p1Character": "byleth",
-    "p2Character": "simon",
-    "p1DamageGiven": 247,
-    "p1DamageTaken": 196,
-    "p2DamageGiven": 585,
-    "p2DamageTaken": 174
-  },
-  {
-    "duoKey": "donkey-kong_bowser",
-    "p1Character": "donkey-kong",
-    "p2Character": "bowser",
-    "p1DamageGiven": 341,
-    "p1DamageTaken": 178,
-    "p2DamageGiven": 463,
-    "p2DamageTaken": 144
-  },
-  {
-    "duoKey": "captain-falcon_donkey-kong",
-    "p1Character": "captain-falcon",
-    "p2Character": "donkey-kong",
-    "p1DamageGiven": 329,
-    "p1DamageTaken": 153,
-    "p2DamageGiven": 439,
-    "p2DamageTaken": 126
-  },
-  {
-    "duoKey": "captain-falcon_simon",
-    "p1Character": "captain-falcon",
-    "p2Character": "simon",
-    "p1DamageGiven": 402,
-    "p1DamageTaken": 162,
-    "p2DamageGiven": 325,
-    "p2DamageTaken": 118
-  },
-  {
-    "duoKey": "dark-samus_bowser",
-    "p1Character": "dark-samus",
-    "p2Character": "bowser",
-    "p1DamageGiven": 375,
-    "p1DamageTaken": 104,
-    "p2DamageGiven": 501,
-    "p2DamageTaken": 191
-  },
-  {
-    "duoKey": "king-k-rool_ganondorf",
-    "p1Character": "king-k-rool",
-    "p2Character": "ganondorf",
-    "p1DamageGiven": 265,
-    "p1DamageTaken": 144,
-    "p2DamageGiven": 322,
-    "p2DamageTaken": 83
-  },
-  {
-    "duoKey": "donkey-kong_diddy-kong",
-    "p1Character": "donkey-kong",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 480,
-    "p1DamageTaken": 136,
-    "p2DamageGiven": 340,
-    "p2DamageTaken": 70
-  },
-  {
-    "duoKey": "ganondorf_donkey-kong",
-    "p1Character": "ganondorf",
-    "p2Character": "donkey-kong",
-    "p1DamageGiven": 261,
-    "p1DamageTaken": 119,
-    "p2DamageGiven": 498,
-    "p2DamageTaken": 96
-  },
-  {
-    "duoKey": "pikachu_diddy-kong",
-    "p1Character": "pikachu",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 319,
-    "p1DamageTaken": 142,
-    "p2DamageGiven": 462,
-    "p2DamageTaken": 183
-  },
-  {
-    "duoKey": "pikachu_bowser",
-    "p1Character": "pikachu",
-    "p2Character": "bowser",
-    "p1DamageGiven": 306,
-    "p1DamageTaken": 136,
-    "p2DamageGiven": 446,
-    "p2DamageTaken": 179
-  },
-  {
-    "duoKey": "byleth_ganondorf",
-    "p1Character": "byleth",
-    "p2Character": "ganondorf",
-    "p1DamageGiven": 266,
-    "p1DamageTaken": 99,
-    "p2DamageGiven": 375,
-    "p2DamageTaken": 162
-  },
-  {
-    "duoKey": "diddy-kong_diddy-kong",
-    "p1Character": "diddy-kong",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 637,
-    "p1DamageTaken": 158,
-    "p2DamageGiven": 439,
-    "p2DamageTaken": 275
-  },
+  "records": [
     {
-    "duoKey": "donkey-kong_captain-falcon",
-    "p1Character": "donkey-kong",
-    "p2Character": "captain-falcon",
-    "p1DamageGiven": 458,
-    "p1DamageTaken": 166,
-    "p2DamageGiven": 427,
-    "p2DamageTaken": 124
-  },    
-  {
-    "duoKey": "byleth_ridley",
-    "p1Character": "byleth",
-    "p2Character": "ridley",
-    "p1DamageGiven": 250,
-    "p1DamageTaken": 115,
-    "p2DamageGiven": 553,
-    "p2DamageTaken": 125
-  },
-      {
-    "duoKey": "young-link_diddy-kong",
-    "p1Character": "young-link",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 529,
-    "p1DamageTaken": 167,
-    "p2DamageGiven": 442,
-    "p2DamageTaken": 222
-  },
+      "duoKey": "king-dedede_diddy-kong",
+      "p1Character": "king-dedede",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 441,
+      "p1DamageTaken": 244,
+      "p2DamageGiven": 489,
+      "p2DamageTaken": 159,
+      "timestamp": 1570235400000
+    },
     {
-    "duoKey": "dark-samus_simon",
-    "p1Character": "dark-samus",
-    "p2Character": "simon",
-    "p1DamageGiven": 275,
-    "p1DamageTaken": 163,
-    "p2DamageGiven": 572,
-    "p2DamageTaken": 179
-  },
-      {
-    "duoKey": "hero_kirby",
-    "p1Character": "hero",
-    "p2Character": "kirby",
-    "p1DamageGiven": 394,
-    "p1DamageTaken": 122,
-    "p2DamageGiven": 420,
-    "p2DamageTaken": 157
-  },
-      {
-    "duoKey": "hero_bowser",
-    "p1Character": "hero",
-    "p2Character": "bowser",
-    "p1DamageGiven": 273,
-    "p1DamageTaken": 94,
-    "p2DamageGiven": 415,
-    "p2DamageTaken": 176
-  },
-      {
-    "duoKey": "king-k-rool_ridley",
-    "p1Character": "king-k-rool",
-    "p2Character": "ridley",
-    "p1DamageGiven": 402,
-    "p1DamageTaken": 57,
-    "p2DamageGiven": 485,
-    "p2DamageTaken": 98
-  },
-      {
-    "duoKey": "king-k-rool_bowser",
-    "p1Character": "king-k-rool",
-    "p2Character": "bowser",
-    "p1DamageGiven": 330,
-    "p1DamageTaken": 79,
-    "p2DamageGiven": 342,
-    "p2DamageTaken": 118
-  },
-      {
-    "duoKey": "hero_simon",
-    "p1Character": "hero",
-    "p2Character": "simon",
-    "p1DamageGiven": 332,
-    "p1DamageTaken": 84,
-    "p2DamageGiven": 341,
-    "p2DamageTaken": 90
-  },
-      {
-    "duoKey": "king-dedede_kirby",
-    "p1Character": "king-dedede",
-    "p2Character": "kirby",
-    "p1DamageGiven": 304,
-    "p1DamageTaken": 167,
-    "p2DamageGiven": 380,
-    "p2DamageTaken": 100
-  },
-      {
-    "duoKey": "byleth_diddy-kong",
-    "p1Character": "byleth",
-    "p2Character": "diddy-kong",
-    "p1DamageGiven": 409,
-    "p1DamageTaken": 132,
-    "p2DamageGiven": 422,
-    "p2DamageTaken": 152
-  },
-      {
-    "duoKey": "ganondorf_simon",
-    "p1Character": "ganondorf",
-    "p2Character": "simon",
-    "p1DamageGiven": 544,
-    "p1DamageTaken": 96,
-    "p2DamageGiven": 337,
-    "p2DamageTaken": 30
-  },
-      {
-    "duoKey": "sephiroth_bowser",
-    "p1Character": "sephiroth",
-    "p2Character": "bowser",
-    "p1DamageGiven": 239,
-    "p1DamageTaken": 118,
-    "p2DamageGiven": 489,
-    "p2DamageTaken": 119
-  },
-      {
-    "duoKey": "ganondorf_roy",
-    "p1Character": "ganondorf",
-    "p2Character": "roy",
-    "p1DamageGiven": 331,
-    "p1DamageTaken": 51,
-    "p2DamageGiven": 300,
-    "p2DamageTaken": 58
-  },
-      {
-    "duoKey": "bowser_bowser",
-    "p1Character": "bowser",
-    "p2Character": "bowser",
-    "p1DamageGiven": 344,
-    "p1DamageTaken": 115,
-    "p2DamageGiven": 431,
-    "p2DamageTaken": 80
-  }
-]
+      "duoKey": "pikachu_kirby",
+      "p1Character": "pikachu",
+      "p2Character": "kirby",
+      "p1DamageGiven": 284,
+      "p1DamageTaken": 89,
+      "p2DamageGiven": 307,
+      "p2DamageTaken": 175,
+      "timestamp": 1576891140000
+    },
+    {
+      "duoKey": "young-link_marth",
+      "p1Character": "young-link",
+      "p2Character": "marth",
+      "p1DamageGiven": 589,
+      "p1DamageTaken": 220,
+      "p2DamageGiven": 588,
+      "p2DamageTaken": 257,
+      "timestamp": 1573256400000
+    },
+    {
+      "duoKey": "ganondorf_diddy-kong",
+      "p1Character": "ganondorf",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 523,
+      "p1DamageTaken": 134,
+      "p2DamageGiven": 179,
+      "p2DamageTaken": 89,
+      "timestamp": 1573262580000
+    },
+    {
+      "duoKey": "ganondorf_ridley",
+      "p1Character": "ganondorf",
+      "p2Character": "ridley",
+      "p1DamageGiven": 437,
+      "p1DamageTaken": 84,
+      "p2DamageGiven": 399,
+      "p2DamageTaken": 197,
+      "timestamp": 1573975140000
+    },
+    {
+      "duoKey": "captain-falcon_kirby",
+      "p1Character": "captain-falcon",
+      "p2Character": "kirby",
+      "p1DamageGiven": 449,
+      "p1DamageTaken": 292,
+      "p2DamageGiven": 507,
+      "p2DamageTaken": 283,
+      "timestamp": 1576033920000
+    },
+    {
+      "duoKey": "young-link_lucas",
+      "p1Character": "young-link",
+      "p2Character": "lucas",
+      "p1DamageGiven": 482,
+      "p1DamageTaken": 114,
+      "p2DamageGiven": 356,
+      "p2DamageTaken": 144,
+      "timestamp": 1576034220000
+    },
+    {
+      "duoKey": "king-dedede_lucas",
+      "p1Character": "king-dedede",
+      "p2Character": "lucas",
+      "p1DamageGiven": 405,
+      "p1DamageTaken": 265,
+      "p2DamageGiven": 290,
+      "p2DamageTaken": 177,
+      "timestamp": 1576890540000
+    },
+    {
+      "duoKey": "young-link_captain-falcon",
+      "p1Character": "young-link",
+      "p2Character": "captain-falcon",
+      "p1DamageGiven": 593,
+      "p1DamageTaken": 308,
+      "p2DamageGiven": 606,
+      "p2DamageTaken": 328,
+      "timestamp": 1576892460000
+    },
+    {
+      "duoKey": "donkey-kong_lucas",
+      "p1Character": "donkey-kong",
+      "p2Character": "lucas",
+      "p1DamageGiven": 433,
+      "p1DamageTaken": 177,
+      "p2DamageGiven": 378,
+      "p2DamageTaken": 135,
+      "timestamp": 1577162400000
+    },
+    {
+      "duoKey": "king-dedede_captain-falcon",
+      "p1Character": "king-dedede",
+      "p2Character": "captain-falcon",
+      "p1DamageGiven": 421,
+      "p1DamageTaken": 199,
+      "p2DamageGiven": 378,
+      "p2DamageTaken": 154,
+      "timestamp": 1608089940000
+    },
+    {
+      "duoKey": "link_ridley",
+      "p1Character": "link",
+      "p2Character": "ridley",
+      "p1DamageGiven": 321,
+      "p1DamageTaken": 151,
+      "p2DamageGiven": 467,
+      "p2DamageTaken": 265,
+      "timestamp": 1577412660000
+    },
+    {
+      "duoKey": "king-k-rool_lucas",
+      "p1Character": "king-k-rool",
+      "p2Character": "lucas",
+      "p1DamageGiven": 362,
+      "p1DamageTaken": 166,
+      "p2DamageGiven": 390,
+      "p2DamageTaken": 182,
+      "timestamp": 1578278580000
+    },
+    {
+      "duoKey": "young-link_ridley",
+      "p1Character": "young-link",
+      "p2Character": "ridley",
+      "p1DamageGiven": 373,
+      "p1DamageTaken": 155,
+      "p2DamageGiven": 597,
+      "p2DamageTaken": 209,
+      "timestamp": 1579234560000
+    },
+    {
+      "duoKey": "king-dedede_ridley",
+      "p1Character": "king-dedede",
+      "p2Character": "ridley",
+      "p1DamageGiven": 306,
+      "p1DamageTaken": 94,
+      "p2DamageGiven": 315,
+      "p2DamageTaken": 122,
+      "timestamp": 1580951220000
+    },
+    {
+      "duoKey": "ganondorf_captain-falcon",
+      "p1Character": "ganondorf",
+      "p2Character": "captain-falcon",
+      "p1DamageGiven": 418,
+      "p1DamageTaken": 208,
+      "p2DamageGiven": 354,
+      "p2DamageTaken": 169,
+      "timestamp": 1580953560000
+    },
+    {
+      "duoKey": "ike_bowser",
+      "p1Character": "ike",
+      "p2Character": "bowser",
+      "p1DamageGiven": 233,
+      "p1DamageTaken": 159,
+      "p2DamageGiven": 516,
+      "p2DamageTaken": 191,
+      "timestamp": 1581474360000
+    },
+    {
+      "duoKey": "king-k-rool_kirby",
+      "p1Character": "king-k-rool",
+      "p2Character": "kirby",
+      "p1DamageGiven": 636,
+      "p1DamageTaken": 133,
+      "p2DamageGiven": 323,
+      "p2DamageTaken": 124,
+      "timestamp": 1583546460000
+    },
+    {
+      "duoKey": "young-link_kirby",
+      "p1Character": "young-link",
+      "p2Character": "kirby",
+      "p1DamageGiven": 369,
+      "p1DamageTaken": 168,
+      "p2DamageGiven": 567,
+      "p2DamageTaken": 158,
+      "timestamp": 1590283740000
+    },
+    {
+      "duoKey": "king-k-rool_diddy-kong",
+      "p1Character": "king-k-rool",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 652,
+      "p1DamageTaken": 196,
+      "p2DamageGiven": 337,
+      "p2DamageTaken": 257,
+      "timestamp": 1590284700000
+    },
+    {
+      "duoKey": "donkey-kong_kirby",
+      "p1Character": "donkey-kong",
+      "p2Character": "kirby",
+      "p1DamageGiven": 569,
+      "p1DamageTaken": 261,
+      "p2DamageGiven": 546,
+      "p2DamageTaken": 188,
+      "timestamp": 1593305280000
+    },
+    {
+      "duoKey": "captain-falcon_bowser",
+      "p1Character": "captain-falcon",
+      "p2Character": "bowser",
+      "p1DamageGiven": 239,
+      "p1DamageTaken": 97,
+      "p2DamageGiven": 428,
+      "p2DamageTaken": 99,
+      "timestamp": 1594500780000
+    },
+    {
+      "duoKey": "donkey-kong_ridley",
+      "p1Character": "donkey-kong",
+      "p2Character": "ridley",
+      "p1DamageGiven": 419,
+      "p1DamageTaken": 195,
+      "p2DamageGiven": 457,
+      "p2DamageTaken": 151,
+      "timestamp": 1594504080000
+    },
+    {
+      "duoKey": "pokemon-trainer_diddy-kong",
+      "p1Character": "pokemon-trainer",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 424,
+      "p1DamageTaken": 160,
+      "p2DamageGiven": 370,
+      "p2DamageTaken": 184,
+      "timestamp": 1594504800000
+    },
+    {
+      "duoKey": "captain-falcon_captain-falcon",
+      "p1Character": "captain-falcon",
+      "p2Character": "captain-falcon",
+      "p1DamageGiven": 315,
+      "p1DamageTaken": 68,
+      "p2DamageGiven": 401,
+      "p2DamageTaken": 90,
+      "timestamp": 1596593040000
+    },
+    {
+      "duoKey": "king-dedede_simon",
+      "p1Character": "king-dedede",
+      "p2Character": "simon",
+      "p1DamageGiven": 265,
+      "p1DamageTaken": 167,
+      "p2DamageGiven": 381,
+      "p2DamageTaken": 42,
+      "timestamp": 1581905280000
+    },
+    {
+      "duoKey": "king-dedede_bowser",
+      "p1Character": "king-dedede",
+      "p2Character": "bowser",
+      "p1DamageGiven": 290,
+      "p1DamageTaken": 87,
+      "p2DamageGiven": 371,
+      "p2DamageTaken": 137,
+      "timestamp": 1581908520000
+    },
+    {
+      "duoKey": "donkey-kong_simon",
+      "p1Character": "donkey-kong",
+      "p2Character": "simon",
+      "p1DamageGiven": 378,
+      "p1DamageTaken": 166,
+      "p2DamageGiven": 377,
+      "p2DamageTaken": 99,
+      "timestamp": 1596593760000
+    },
+    {
+      "duoKey": "ganondorf_kirby",
+      "p1Character": "ganondorf",
+      "p2Character": "kirby",
+      "p1DamageGiven": 445,
+      "p1DamageTaken": 108,
+      "p2DamageGiven": 242,
+      "p2DamageTaken": 76,
+      "timestamp": 1597365420000
+    },
+    {
+      "duoKey": "bowser_donkey-kong",
+      "p1Character": "bowser",
+      "p2Character": "donkey-kong",
+      "p1DamageGiven": 447,
+      "p1DamageTaken": 140,
+      "p2DamageGiven": 338,
+      "p2DamageTaken": 155,
+      "timestamp": 1598758620000
+    },
+    {
+      "duoKey": "king-k-rool_roy",
+      "p1Character": "king-k-rool",
+      "p2Character": "roy",
+      "p1DamageGiven": 426,
+      "p1DamageTaken": 166,
+      "p2DamageGiven": 470,
+      "p2DamageTaken": 122,
+      "timestamp": 1599009300000
+    },
+    {
+      "duoKey": "donkey-kong_donkey-kong",
+      "p1Character": "donkey-kong",
+      "p2Character": "donkey-kong",
+      "p1DamageGiven": 500,
+      "p1DamageTaken": 157,
+      "p2DamageGiven": 314,
+      "p2DamageTaken": 117,
+      "timestamp": 1599009840000
+    },
+    {
+      "duoKey": "king-k-rool_simon",
+      "p1Character": "king-k-rool",
+      "p2Character": "simon",
+      "p1DamageGiven": 440,
+      "p1DamageTaken": 254,
+      "p2DamageGiven": 381,
+      "p2DamageTaken": 74,
+      "timestamp": 1599609360000
+    },
+    {
+      "duoKey": "bowser_kirby",
+      "p1Character": "bowser",
+      "p2Character": "kirby",
+      "p1DamageGiven": 404,
+      "p1DamageTaken": 162,
+      "p2DamageGiven": 315,
+      "p2DamageTaken": 117,
+      "timestamp": 1600309620000
+    },
+    {
+      "duoKey": "young-link_roy",
+      "p1Character": "young-link",
+      "p2Character": "roy",
+      "p1DamageGiven": 382,
+      "p1DamageTaken": 92,
+      "p2DamageGiven": 407,
+      "p2DamageTaken": 140,
+      "timestamp": 1600311420000
+    },
+    {
+      "duoKey": "king-k-rool_donkey-kong",
+      "p1Character": "king-k-rool",
+      "p2Character": "donkey-kong",
+      "p1DamageGiven": 362,
+      "p1DamageTaken": 80,
+      "p2DamageGiven": 436,
+      "p2DamageTaken": 110,
+      "timestamp": 1602127860000
+    },
+    {
+      "duoKey": "ganondorf_ganondorf",
+      "p1Character": "ganondorf",
+      "p2Character": "ganondorf",
+      "p1DamageGiven": 519,
+      "p1DamageTaken": 79,
+      "p2DamageGiven": 295,
+      "p2DamageTaken": 111,
+      "timestamp": 1602293580000
+    },
+    {
+      "duoKey": "hero_roy",
+      "p1Character": "hero",
+      "p2Character": "roy",
+      "p1DamageGiven": 296,
+      "p1DamageTaken": 126,
+      "p2DamageGiven": 442,
+      "p2DamageTaken": 87,
+      "timestamp": 1602984540000
+    },
+    {
+      "duoKey": "ike_ridley",
+      "p1Character": "ike",
+      "p2Character": "ridley",
+      "p1DamageGiven": 376,
+      "p1DamageTaken": 168,
+      "p2DamageGiven": 452,
+      "p2DamageTaken": 222,
+      "timestamp": 1602987120000
+    },
+    {
+      "duoKey": "ganondorf_bowser",
+      "p1Character": "ganondorf",
+      "p2Character": "bowser",
+      "p1DamageGiven": 365,
+      "p1DamageTaken": 59,
+      "p2DamageGiven": 330,
+      "p2DamageTaken": 69,
+      "timestamp": 1600564860000
+    },
+    {
+      "duoKey": "simon_richter",
+      "p1Character": "simon",
+      "p2Character": "richter",
+      "p1DamageGiven": 505,
+      "p1DamageTaken": 131,
+      "p2DamageGiven": 362,
+      "p2DamageTaken": 140,
+      "timestamp": 1600573080000
+    },
+    {
+      "duoKey": "byleth_roy",
+      "p1Character": "byleth",
+      "p2Character": "roy",
+      "p1DamageGiven": 400,
+      "p1DamageTaken": 77,
+      "p2DamageGiven": 255,
+      "p2DamageTaken": 89,
+      "timestamp": 1600660320000
+    },
+    {
+      "duoKey": "dark-samus_roy",
+      "p1Character": "dark-samus",
+      "p2Character": "roy",
+      "p1DamageGiven": 257,
+      "p1DamageTaken": 78,
+      "p2DamageGiven": 281,
+      "p2DamageTaken": 107,
+      "timestamp": 1600920420000
+    },
+    {
+      "duoKey": "byleth_simon",
+      "p1Character": "byleth",
+      "p2Character": "simon",
+      "p1DamageGiven": 247,
+      "p1DamageTaken": 196,
+      "p2DamageGiven": 585,
+      "p2DamageTaken": 174,
+      "timestamp": 1601518560000
+    },
+    {
+      "duoKey": "donkey-kong_bowser",
+      "p1Character": "donkey-kong",
+      "p2Character": "bowser",
+      "p1DamageGiven": 341,
+      "p1DamageTaken": 178,
+      "p2DamageGiven": 463,
+      "p2DamageTaken": 144,
+      "timestamp": 1602125280000
+    },
+    {
+      "duoKey": "captain-falcon_donkey-kong",
+      "p1Character": "captain-falcon",
+      "p2Character": "donkey-kong",
+      "p1DamageGiven": 329,
+      "p1DamageTaken": 153,
+      "p2DamageGiven": 439,
+      "p2DamageTaken": 126,
+      "timestamp": 1602987660000
+    },
+    {
+      "duoKey": "captain-falcon_simon",
+      "p1Character": "captain-falcon",
+      "p2Character": "simon",
+      "p1DamageGiven": 402,
+      "p1DamageTaken": 162,
+      "p2DamageGiven": 325,
+      "p2DamageTaken": 118,
+      "timestamp": 1603585920000
+    },
+    {
+      "duoKey": "dark-samus_bowser",
+      "p1Character": "dark-samus",
+      "p2Character": "bowser",
+      "p1DamageGiven": 375,
+      "p1DamageTaken": 104,
+      "p2DamageGiven": 501,
+      "p2DamageTaken": 191,
+      "timestamp": 1604707260000
+    },
+    {
+      "duoKey": "king-k-rool_ganondorf",
+      "p1Character": "king-k-rool",
+      "p2Character": "ganondorf",
+      "p1DamageGiven": 265,
+      "p1DamageTaken": 144,
+      "p2DamageGiven": 322,
+      "p2DamageTaken": 83,
+      "timestamp": 1604709000000
+    },
+    {
+      "duoKey": "donkey-kong_diddy-kong",
+      "p1Character": "donkey-kong",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 480,
+      "p1DamageTaken": 136,
+      "p2DamageGiven": 340,
+      "p2DamageTaken": 70,
+      "timestamp": 1605755280000
+    },
+    {
+      "duoKey": "ganondorf_donkey-kong",
+      "p1Character": "ganondorf",
+      "p2Character": "donkey-kong",
+      "p1DamageGiven": 261,
+      "p1DamageTaken": 119,
+      "p2DamageGiven": 498,
+      "p2DamageTaken": 96,
+      "timestamp": 1605766560000
+    },
+    {
+      "duoKey": "pikachu_diddy-kong",
+      "p1Character": "pikachu",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 319,
+      "p1DamageTaken": 142,
+      "p2DamageGiven": 462,
+      "p2DamageTaken": 183,
+      "timestamp": 1605814260000
+    },
+    {
+      "duoKey": "pikachu_bowser",
+      "p1Character": "pikachu",
+      "p2Character": "bowser",
+      "p1DamageGiven": 306,
+      "p1DamageTaken": 136,
+      "p2DamageGiven": 446,
+      "p2DamageTaken": 179,
+      "timestamp": 1605768600000
+    },
+    {
+      "duoKey": "byleth_ganondorf",
+      "p1Character": "byleth",
+      "p2Character": "ganondorf",
+      "p1DamageGiven": 266,
+      "p1DamageTaken": 99,
+      "p2DamageGiven": 375,
+      "p2DamageTaken": 162,
+      "timestamp": 1605802020000
+    },
+    {
+      "duoKey": "diddy-kong_diddy-kong",
+      "p1Character": "diddy-kong",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 637,
+      "p1DamageTaken": 158,
+      "p2DamageGiven": 439,
+      "p2DamageTaken": 275,
+      "timestamp": 1605810780000
+    },
+    {
+      "duoKey": "donkey-kong_captain-falcon",
+      "p1Character": "donkey-kong",
+      "p2Character": "captain-falcon",
+      "p1DamageGiven": 458,
+      "p1DamageTaken": 166,
+      "p2DamageGiven": 427,
+      "p2DamageTaken": 124,
+      "timestamp": 1605811140000
+    },
+    {
+      "duoKey": "byleth_ridley",
+      "p1Character": "byleth",
+      "p2Character": "ridley",
+      "p1DamageGiven": 250,
+      "p1DamageTaken": 115,
+      "p2DamageGiven": 553,
+      "p2DamageTaken": 125,
+      "timestamp": 1605812940000
+    },
+    {
+      "duoKey": "young-link_diddy-kong",
+      "p1Character": "young-link",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 529,
+      "p1DamageTaken": 167,
+      "p2DamageGiven": 442,
+      "p2DamageTaken": 222,
+      "timestamp": 1606964400000
+    },
+    {
+      "duoKey": "dark-samus_simon",
+      "p1Character": "dark-samus",
+      "p2Character": "simon",
+      "p1DamageGiven": 275,
+      "p1DamageTaken": 163,
+      "p2DamageGiven": 572,
+      "p2DamageTaken": 179,
+      "timestamp": 1606966380000
+    },
+    {
+      "duoKey": "hero_kirby",
+      "p1Character": "hero",
+      "p2Character": "kirby",
+      "p1DamageGiven": 394,
+      "p1DamageTaken": 122,
+      "p2DamageGiven": 420,
+      "p2DamageTaken": 157,
+      "timestamp": 1608088920000
+    },
+    {
+      "duoKey": "hero_bowser",
+      "p1Character": "hero",
+      "p2Character": "bowser",
+      "p1DamageGiven": 273,
+      "p1DamageTaken": 94,
+      "p2DamageGiven": 415,
+      "p2DamageTaken": 176,
+      "timestamp": 1608139800000
+    },
+    {
+      "duoKey": "king-k-rool_ridley",
+      "p1Character": "king-k-rool",
+      "p2Character": "ridley",
+      "p1DamageGiven": 402,
+      "p1DamageTaken": 57,
+      "p2DamageGiven": 485,
+      "p2DamageTaken": 98,
+      "timestamp": 1608704460000
+    },
+    {
+      "duoKey": "king-k-rool_bowser",
+      "p1Character": "king-k-rool",
+      "p2Character": "bowser",
+      "p1DamageGiven": 330,
+      "p1DamageTaken": 79,
+      "p2DamageGiven": 342,
+      "p2DamageTaken": 118,
+      "timestamp": 1610503260000
+    },
+    {
+      "duoKey": "hero_simon",
+      "p1Character": "hero",
+      "p2Character": "simon",
+      "p1DamageGiven": 332,
+      "p1DamageTaken": 84,
+      "p2DamageGiven": 341,
+      "p2DamageTaken": 90,
+      "timestamp": 1611626340000
+    },
+    {
+      "duoKey": "king-dedede_kirby",
+      "p1Character": "king-dedede",
+      "p2Character": "kirby",
+      "p1DamageGiven": 304,
+      "p1DamageTaken": 167,
+      "p2DamageGiven": 380,
+      "p2DamageTaken": 100,
+      "timestamp": 1611627000000
+    },
+    {
+      "duoKey": "byleth_diddy-kong",
+      "p1Character": "byleth",
+      "p2Character": "diddy-kong",
+      "p1DamageGiven": 409,
+      "p1DamageTaken": 132,
+      "p2DamageGiven": 422,
+      "p2DamageTaken": 152,
+      "timestamp": 1611636780000
+    },
+    {
+      "duoKey": "ganondorf_simon",
+      "p1Character": "ganondorf",
+      "p2Character": "simon",
+      "p1DamageGiven": 544,
+      "p1DamageTaken": 96,
+      "p2DamageGiven": 337,
+      "p2DamageTaken": 30,
+      "timestamp": 1612316160000
+    },
+    {
+      "duoKey": "sephiroth_bowser",
+      "p1Character": "sephiroth",
+      "p2Character": "bowser",
+      "p1DamageGiven": 239,
+      "p1DamageTaken": 118,
+      "p2DamageGiven": 489,
+      "p2DamageTaken": 119,
+      "timestamp": 1612317180000
+    },
+    {
+      "duoKey": "ganondorf_roy",
+      "p1Character": "ganondorf",
+      "p2Character": "roy",
+      "p1DamageGiven": 331,
+      "p1DamageTaken": 51,
+      "p2DamageGiven": 300,
+      "p2DamageTaken": 58,
+      "timestamp": 1612318920000
+    },
+    {
+      "duoKey": "bowser_bowser",
+      "p1Character": "bowser",
+      "p2Character": "bowser",
+      "p1DamageGiven": 344,
+      "p1DamageTaken": 115,
+      "p2DamageGiven": 431,
+      "p2DamageTaken": 80,
+      "timestamp": 1612318020000
+    }
+  ]
 }

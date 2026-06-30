@@ -1,2 +1,1 @@
-export const ENABLE_RECORD_DELETION_ACTIONS
- = false;
+export const ENABLE_RECORD_DELETION_ACTIONS = true;

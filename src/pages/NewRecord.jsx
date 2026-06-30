@@ -1,22 +1,21 @@
 import { useState } from "react";
 import PlayerEntry from "../components/PlayerEntry";
 import RecordCard from "../components/RecordCard";
+import RecordResultCard from "../components/RecordResultCard";
 import PageContainer from "../components/PageContainer";
 import Panel from "../components/Panel";
 import MessageBanner from "../components/MessageBanner";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
-import { ENABLE_RECORD_DELETION_ACTIONS
- } from "../config/devFlags";
-
+import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
 
 export default function NewRecord() {
   const [player1, setPlayer1] = useState({});
   const [player2, setPlayer2] = useState({});
   const [lastSavedRecord, setLastSavedRecord] = useState(null);
-  const [saveMessage, setSaveMessage] = useState("");
-  const [messageTone, setMessageTone] = useState("info");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [resultCardData, setResultCardData] = useState(null);
 
   const { saveRecord, getRecord, clearAllRecords } = useRecords();
 
@@ -57,10 +56,12 @@ export default function NewRecord() {
     const validationError = validateRecordInput(player1, player2);
 
     if (validationError) {
-      setMessageTone("error");
-      setSaveMessage(validationError);
+      setErrorMessage(validationError);
+      setResultCardData(null);
       return;
     }
+
+    setErrorMessage("");
 
     const record = {
       duoKey: createDuoKey(player1.characterId, player2.characterId),
@@ -74,26 +75,42 @@ export default function NewRecord() {
     };
 
     const existing = getRecord(record.duoKey);
+    const newRatio = getTeamRatio(record);
 
     if (!existing) {
       saveRecord(record);
       setLastSavedRecord(record);
-      setMessageTone("success");
-      setSaveMessage("New record saved.");
+      setResultCardData({
+        title: "New Record Saved",
+        tone: "success",
+        newRatio
+      });
       return;
     }
 
     const currentRatio = getTeamRatio(existing);
-    const newRatio = getTeamRatio(record);
+    const ratioDifference = newRatio - currentRatio;
 
     if (newRatio > currentRatio) {
       saveRecord(record);
       setLastSavedRecord(record);
-      setMessageTone("success");
-      setSaveMessage("Record updated.");
+      setResultCardData({
+        title: "Record Updated",
+        tone: "success",
+        newRatio,
+        oldRatio: currentRatio,
+        difference: ratioDifference,
+        differenceLabel: "Improved By"
+      });
     } else {
-      setMessageTone("info");
-      setSaveMessage("Record not saved. Existing duo record is still better.");
+      setResultCardData({
+        title: "Record Not Beaten",
+        tone: "info",
+        newRatio,
+        oldRatio: currentRatio,
+        difference: Math.abs(ratioDifference),
+        differenceLabel: "Short By"
+      });
     }
   }
 
@@ -108,13 +125,12 @@ export default function NewRecord() {
           <PlayerEntry onChange={setPlayer2} />
         </Panel>
 
-        <div className="form-actions form-action-bar">
+        <div className="form-actions sticky-action-bar">
           <button type="submit" className="primary-button">
             Save Record
           </button>
 
-          {ENABLE_RECORD_DELETION_ACTIONS
- && (
+          {ENABLE_RECORD_DELETION_ACTIONS && (
             <button
               type="button"
               className="secondary-button"
@@ -125,7 +141,11 @@ export default function NewRecord() {
           )}
         </div>
 
-        <MessageBanner message={saveMessage} tone={messageTone} />
+        {errorMessage && (
+          <MessageBanner message={errorMessage} tone="error" />
+        )}
+
+        {resultCardData && <RecordResultCard {...resultCardData} />}
       </form>
 
       {lastSavedRecord && (

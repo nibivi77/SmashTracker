@@ -704,6 +704,49 @@ list-style: none;
   flex-shrink: 0;
 }
 
+.record-result-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+  background: var(--color-surface);
+}
+
+.record-result-card-success {
+  background: var(--banner-success);
+}
+
+.record-result-card-info {
+  background: var(--banner-info);
+}
+
+.record-result-card-error {
+  background: var(--banner-error);
+}
+
+.record-result-title {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-lg);
+}
+
+.record-result-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.record-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.record-result-row:last-child {
+  border-bottom: none;
+}
 
 @media (max-width: 520px) {
   .record-card-summary,
