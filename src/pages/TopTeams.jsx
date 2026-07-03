@@ -69,11 +69,7 @@ export default function TopTeams() {
       <ul className="card-list">
         {visibleTeams.map((record, index) => (
           <li key={record.duoKey} className="card-list-item">
-            <div className="rank-label">
-              <strong>#{index + 1}</strong>
-            </div>
-
-            <RecordCard record={record} />
+            <RecordCard record={record} rank={index + 1} />
           </li>
         ))}
       </ul>

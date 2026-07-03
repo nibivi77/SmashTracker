@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "records": [
     {
       "duoKey": "king-dedede_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 441,
@@ -13,6 +15,8 @@
     },
     {
       "duoKey": "pikachu_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "pikachu",
       "p2Character": "kirby",
       "p1DamageGiven": 284,
@@ -23,6 +27,8 @@
     },
     {
       "duoKey": "young-link_marth",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "marth",
       "p1DamageGiven": 589,
@@ -33,6 +39,8 @@
     },
     {
       "duoKey": "ganondorf_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 523,
@@ -43,6 +51,8 @@
     },
     {
       "duoKey": "ganondorf_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "ridley",
       "p1DamageGiven": 437,
@@ -53,6 +63,8 @@
     },
     {
       "duoKey": "captain-falcon_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "captain-falcon",
       "p2Character": "kirby",
       "p1DamageGiven": 449,
@@ -63,6 +75,8 @@
     },
     {
       "duoKey": "young-link_lucas",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "lucas",
       "p1DamageGiven": 482,
@@ -73,6 +87,8 @@
     },
     {
       "duoKey": "king-dedede_lucas",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "lucas",
       "p1DamageGiven": 405,
@@ -83,6 +99,8 @@
     },
     {
       "duoKey": "young-link_captain-falcon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "captain-falcon",
       "p1DamageGiven": 593,
@@ -93,6 +111,8 @@
     },
     {
       "duoKey": "donkey-kong_lucas",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "lucas",
       "p1DamageGiven": 433,
@@ -103,6 +123,8 @@
     },
     {
       "duoKey": "king-dedede_captain-falcon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "captain-falcon",
       "p1DamageGiven": 421,
@@ -113,6 +135,8 @@
     },
     {
       "duoKey": "link_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "link",
       "p2Character": "ridley",
       "p1DamageGiven": 321,
@@ -123,6 +147,8 @@
     },
     {
       "duoKey": "king-k-rool_lucas",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "lucas",
       "p1DamageGiven": 362,
@@ -133,6 +159,8 @@
     },
     {
       "duoKey": "young-link_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "ridley",
       "p1DamageGiven": 373,
@@ -143,6 +171,8 @@
     },
     {
       "duoKey": "king-dedede_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "ridley",
       "p1DamageGiven": 306,
@@ -153,6 +183,8 @@
     },
     {
       "duoKey": "ganondorf_captain-falcon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "captain-falcon",
       "p1DamageGiven": 418,
@@ -163,6 +195,8 @@
     },
     {
       "duoKey": "ike_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ike",
       "p2Character": "bowser",
       "p1DamageGiven": 233,
@@ -173,6 +207,8 @@
     },
     {
       "duoKey": "king-k-rool_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "kirby",
       "p1DamageGiven": 636,
@@ -183,6 +219,8 @@
     },
     {
       "duoKey": "young-link_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "kirby",
       "p1DamageGiven": 369,
@@ -193,6 +231,8 @@
     },
     {
       "duoKey": "king-k-rool_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 652,
@@ -203,6 +243,8 @@
     },
     {
       "duoKey": "donkey-kong_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "kirby",
       "p1DamageGiven": 569,
@@ -213,6 +255,8 @@
     },
     {
       "duoKey": "captain-falcon_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "captain-falcon",
       "p2Character": "bowser",
       "p1DamageGiven": 239,
@@ -223,6 +267,8 @@
     },
     {
       "duoKey": "donkey-kong_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "ridley",
       "p1DamageGiven": 419,
@@ -233,6 +279,8 @@
     },
     {
       "duoKey": "pokemon-trainer_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "pokemon-trainer",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 424,
@@ -243,6 +291,8 @@
     },
     {
       "duoKey": "captain-falcon_captain-falcon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "captain-falcon",
       "p2Character": "captain-falcon",
       "p1DamageGiven": 315,
@@ -253,6 +303,8 @@
     },
     {
       "duoKey": "king-dedede_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "simon",
       "p1DamageGiven": 265,
@@ -263,6 +315,8 @@
     },
     {
       "duoKey": "king-dedede_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "bowser",
       "p1DamageGiven": 290,
@@ -273,6 +327,8 @@
     },
     {
       "duoKey": "donkey-kong_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "simon",
       "p1DamageGiven": 378,
@@ -283,6 +339,8 @@
     },
     {
       "duoKey": "ganondorf_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "kirby",
       "p1DamageGiven": 445,
@@ -293,6 +351,8 @@
     },
     {
       "duoKey": "bowser_donkey-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "bowser",
       "p2Character": "donkey-kong",
       "p1DamageGiven": 447,
@@ -303,6 +363,8 @@
     },
     {
       "duoKey": "king-k-rool_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "roy",
       "p1DamageGiven": 426,
@@ -313,6 +375,8 @@
     },
     {
       "duoKey": "donkey-kong_donkey-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "donkey-kong",
       "p1DamageGiven": 500,
@@ -323,6 +387,8 @@
     },
     {
       "duoKey": "king-k-rool_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "simon",
       "p1DamageGiven": 440,
@@ -333,6 +399,8 @@
     },
     {
       "duoKey": "bowser_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "bowser",
       "p2Character": "kirby",
       "p1DamageGiven": 404,
@@ -343,6 +411,8 @@
     },
     {
       "duoKey": "young-link_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "roy",
       "p1DamageGiven": 382,
@@ -353,6 +423,8 @@
     },
     {
       "duoKey": "king-k-rool_donkey-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "donkey-kong",
       "p1DamageGiven": 362,
@@ -363,6 +435,8 @@
     },
     {
       "duoKey": "ganondorf_ganondorf",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "ganondorf",
       "p1DamageGiven": 519,
@@ -373,6 +447,8 @@
     },
     {
       "duoKey": "hero_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "hero",
       "p2Character": "roy",
       "p1DamageGiven": 296,
@@ -383,6 +459,8 @@
     },
     {
       "duoKey": "ike_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ike",
       "p2Character": "ridley",
       "p1DamageGiven": 376,
@@ -393,6 +471,8 @@
     },
     {
       "duoKey": "ganondorf_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "bowser",
       "p1DamageGiven": 365,
@@ -403,6 +483,8 @@
     },
     {
       "duoKey": "simon_richter",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "simon",
       "p2Character": "richter",
       "p1DamageGiven": 505,
@@ -413,6 +495,8 @@
     },
     {
       "duoKey": "byleth_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "byleth",
       "p2Character": "roy",
       "p1DamageGiven": 400,
@@ -423,6 +507,8 @@
     },
     {
       "duoKey": "dark-samus_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "dark-samus",
       "p2Character": "roy",
       "p1DamageGiven": 257,
@@ -433,6 +519,8 @@
     },
     {
       "duoKey": "byleth_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "byleth",
       "p2Character": "simon",
       "p1DamageGiven": 247,
@@ -443,6 +531,8 @@
     },
     {
       "duoKey": "donkey-kong_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "bowser",
       "p1DamageGiven": 341,
@@ -453,6 +543,8 @@
     },
     {
       "duoKey": "captain-falcon_donkey-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "captain-falcon",
       "p2Character": "donkey-kong",
       "p1DamageGiven": 329,
@@ -463,6 +555,8 @@
     },
     {
       "duoKey": "captain-falcon_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "captain-falcon",
       "p2Character": "simon",
       "p1DamageGiven": 402,
@@ -473,6 +567,8 @@
     },
     {
       "duoKey": "dark-samus_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "dark-samus",
       "p2Character": "bowser",
       "p1DamageGiven": 375,
@@ -483,6 +579,8 @@
     },
     {
       "duoKey": "king-k-rool_ganondorf",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "ganondorf",
       "p1DamageGiven": 265,
@@ -493,6 +591,8 @@
     },
     {
       "duoKey": "donkey-kong_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 480,
@@ -503,6 +603,8 @@
     },
     {
       "duoKey": "ganondorf_donkey-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "donkey-kong",
       "p1DamageGiven": 261,
@@ -513,6 +615,8 @@
     },
     {
       "duoKey": "pikachu_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "pikachu",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 319,
@@ -523,6 +627,8 @@
     },
     {
       "duoKey": "pikachu_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "pikachu",
       "p2Character": "bowser",
       "p1DamageGiven": 306,
@@ -533,6 +639,8 @@
     },
     {
       "duoKey": "byleth_ganondorf",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "byleth",
       "p2Character": "ganondorf",
       "p1DamageGiven": 266,
@@ -543,6 +651,8 @@
     },
     {
       "duoKey": "diddy-kong_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "diddy-kong",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 637,
@@ -553,6 +663,8 @@
     },
     {
       "duoKey": "donkey-kong_captain-falcon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "donkey-kong",
       "p2Character": "captain-falcon",
       "p1DamageGiven": 458,
@@ -563,6 +675,8 @@
     },
     {
       "duoKey": "byleth_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "byleth",
       "p2Character": "ridley",
       "p1DamageGiven": 250,
@@ -573,6 +687,8 @@
     },
     {
       "duoKey": "young-link_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "young-link",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 529,
@@ -583,6 +699,8 @@
     },
     {
       "duoKey": "dark-samus_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "dark-samus",
       "p2Character": "simon",
       "p1DamageGiven": 275,
@@ -593,6 +711,8 @@
     },
     {
       "duoKey": "hero_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "hero",
       "p2Character": "kirby",
       "p1DamageGiven": 394,
@@ -603,6 +723,8 @@
     },
     {
       "duoKey": "hero_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "hero",
       "p2Character": "bowser",
       "p1DamageGiven": 273,
@@ -613,6 +735,8 @@
     },
     {
       "duoKey": "king-k-rool_ridley",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "ridley",
       "p1DamageGiven": 402,
@@ -623,6 +747,8 @@
     },
     {
       "duoKey": "king-k-rool_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-k-rool",
       "p2Character": "bowser",
       "p1DamageGiven": 330,
@@ -633,6 +759,8 @@
     },
     {
       "duoKey": "hero_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "hero",
       "p2Character": "simon",
       "p1DamageGiven": 332,
@@ -643,6 +771,8 @@
     },
     {
       "duoKey": "king-dedede_kirby",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "king-dedede",
       "p2Character": "kirby",
       "p1DamageGiven": 304,
@@ -653,6 +783,8 @@
     },
     {
       "duoKey": "byleth_diddy-kong",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "byleth",
       "p2Character": "diddy-kong",
       "p1DamageGiven": 409,
@@ -663,6 +795,8 @@
     },
     {
       "duoKey": "ganondorf_simon",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "simon",
       "p1DamageGiven": 544,
@@ -673,6 +807,8 @@
     },
     {
       "duoKey": "sephiroth_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "sephiroth",
       "p2Character": "bowser",
       "p1DamageGiven": 239,
@@ -683,6 +819,8 @@
     },
     {
       "duoKey": "ganondorf_roy",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "ganondorf",
       "p2Character": "roy",
       "p1DamageGiven": 331,
@@ -693,6 +831,8 @@
     },
     {
       "duoKey": "bowser_bowser",
+      "p1Player": "ben",
+      "p2Player": "oli",
       "p1Character": "bowser",
       "p2Character": "bowser",
       "p1DamageGiven": 344,
@@ -700,6 +840,114 @@
       "p2DamageGiven": 431,
       "p2DamageTaken": 80,
       "timestamp": 1612318020000
+    },
+    {
+      "duoKey": "king-dedede_dr-mario",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "king-dedede",
+      "p2Character": "dr-mario",
+      "p1DamageGiven": 393,
+      "p1DamageTaken": 196,
+      "p2DamageGiven": 369,
+      "p2DamageTaken": 161,
+      "timestamp": 1605131760000
+    },
+    {
+      "duoKey": "hero_cloud",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "hero",
+      "p2Character": "cloud",
+      "p1DamageGiven": 340,
+      "p1DamageTaken": 160,
+      "p2DamageGiven": 448,
+      "p2DamageTaken": 120,
+      "timestamp": 1605132300000
+    },
+    {
+      "duoKey": "king-k-rool_lucina",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "king-k-rool",
+      "p2Character": "lucina",
+      "p1DamageGiven": 422,
+      "p1DamageTaken": 195,
+      "p2DamageGiven": 403,
+      "p2DamageTaken": 192,
+      "timestamp": 1605136860000
+    },
+    {
+      "duoKey": "donkey-kong_mario",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "donkey-kong",
+      "p2Character": "mario",
+      "p1DamageGiven": 643,
+      "p1DamageTaken": 153,
+      "p2DamageGiven": 308,
+      "p2DamageTaken": 278,
+      "timestamp": 1605137160000
+    },
+    {
+      "duoKey": "ganondorf_young-link",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "ganondorf",
+      "p2Character": "young-link",
+      "p1DamageGiven": 697,
+      "p1DamageTaken": 127,
+      "p2DamageGiven": 344,
+      "p2DamageTaken": 155,
+      "timestamp": 1605137400000
+    },
+    {
+      "duoKey": "hero_ike",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "hero",
+      "p2Character": "ike",
+      "p1DamageGiven": 253,
+      "p1DamageTaken": 119,
+      "p2DamageGiven": 350,
+      "p2DamageTaken": 112,
+      "timestamp": 1607726220000
+    },
+    {
+      "duoKey": "dark-samus_cloud",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "dark-samus",
+      "p2Character": "cloud",
+      "p1DamageGiven": 461,
+      "p1DamageTaken": 164,
+      "p2DamageGiven": 483,
+      "p2DamageTaken": 220,
+      "timestamp": 1628012520000
+    },
+    {
+      "duoKey": "donkey-kong_cloud",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "donkey-kong",
+      "p2Character": "cloud",
+      "p1DamageGiven": 445,
+      "p1DamageTaken": 107,
+      "p2DamageGiven": 235,
+      "p2DamageTaken": 106,
+      "timestamp": 1628624400000
+    },
+    {
+      "duoKey": "king-k-rool_king-k-rool",
+      "p1Player": "ben",
+      "p2Player": "ju",
+      "p1Character": "king-k-rool",
+      "p2Character": "king-k-rool",
+      "p1DamageGiven": 367,
+      "p1DamageTaken": 95,
+      "p2DamageGiven": 379,
+      "p2DamageTaken": 158,
+      "timestamp": 1628628180000
     }
   ]
 }

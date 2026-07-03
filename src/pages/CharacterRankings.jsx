@@ -91,6 +91,15 @@ export default function CharacterRankings() {
               >
                 P2
               </button>
+
+              <button
+                type="button"
+                className={`compact-toggle-button ${scope === "p3" ? "active" : ""}`}
+                onClick={() => setScope("p3")}
+                aria-pressed={scope === "p3"}
+              >
+                P3
+              </button>
             </div>
           </div>
 
@@ -128,7 +137,7 @@ export default function CharacterRankings() {
           >
             <CharacterCard
               performance={performance}
-              rankLabel={`#${index + 1}`}
+              rank={index + 1}
             />
           </li>
         ))}

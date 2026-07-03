@@ -1,7 +1,8 @@
 import { useId, useState } from "react";
 import { characters } from "../data/characters";
+import { players } from "../data/players";
 
-export default function CharacterCard({ performance, rankLabel }) {
+export default function CharacterCard({ performance, rank = null }) {
   const [isOpen, setIsOpen] = useState(false);
   const contentId = useId();
 
@@ -16,6 +17,48 @@ export default function CharacterCard({ performance, rankLabel }) {
   const savedAt = performance.timestamp
     ? new Date(performance.timestamp).toLocaleString()
     : "Imported before timestamps";
+
+  function renderRank() {
+    if (rank === null) {
+      return null;
+    }
+
+    if (rank === 1) {
+      return (
+        <img
+          src={`${import.meta.env.BASE_URL}first.png`}
+          alt="1st place"
+          className="team-rank-image-inline"
+        />
+      );
+    }
+
+    if (rank === 2) {
+      return (
+        <img
+          src={`${import.meta.env.BASE_URL}second.png`}
+          alt="2nd place"
+          className="team-rank-image-inline"
+        />
+      );
+    }
+
+    if (rank === 3) {
+      return (
+        <img
+          src={`${import.meta.env.BASE_URL}third.png`}
+          alt="3rd place"
+          className="team-rank-image-inline"
+        />
+      );
+    }
+
+    return (
+      <span className="team-rank-badge-inline">
+        #{rank}
+      </span>
+    );
+  }
 
   return (
     <div className={`character-card accordion-card ${isOpen ? "expanded" : ""}`}>
@@ -38,11 +81,10 @@ export default function CharacterCard({ performance, rankLabel }) {
           <div>
             <div className="character-card-name-row">
               <strong>{character?.name}</strong>
-              {rankLabel && <span className="inline-rank-label">{rankLabel}</span>}
             </div>
 
             <div className="character-card-role">
-              {performance.playerSlot === "p1" ? "Player 1" : "Player 2"}
+              {performance.playerSlot === "p1" ? players.find((c) => c.id === performance.player1Name)?.name : players.find((c) => c.id === performance.player2Name)?.name}
             </div>
           </div>
         </div>
@@ -51,6 +93,8 @@ export default function CharacterCard({ performance, rankLabel }) {
           <div className="ratio-badge ratio-badge-player">
             {ratio}
           </div>
+
+          {renderRank()}
 
           <span className="accordion-arrow" aria-hidden="true">
             ▾
@@ -77,6 +121,7 @@ export default function CharacterCard({ performance, rankLabel }) {
             <div className="character-stat-line">
               <span>Partner</span>
               <strong>{partner?.name}</strong>
+              <span>({performance.playerSlot !== "p1" ? players.find((c) => c.id === performance.player1Name)?.name : players.find((c) => c.id === performance.player2Name)?.name})</span>
             </div>
           </div>
 

@@ -2,6 +2,8 @@ import { getPlayerRatio } from "./calculations";
 
 export function buildPerformanceEntry(record, playerSlot) {
   const isPlayer1 = playerSlot === "p1";
+  const player1Name = record.p1Player || "Unknown Player 1";
+  const player2Name = record.p2Player || "Unknown Player 2";
 
   const characterId = isPlayer1 ? record.p1Character : record.p2Character;
   const damageGiven = isPlayer1 ? Number(record.p1DamageGiven) : Number(record.p2DamageGiven);
@@ -10,6 +12,8 @@ export function buildPerformanceEntry(record, playerSlot) {
 
   return {
     duoKey: record.duoKey,
+    player1Name,
+    player2Name,
     playerSlot,
     characterId,
     partnerCharacterId,
