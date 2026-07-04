@@ -7,11 +7,10 @@ export default function RecordCard({ record, onDelete, rank = null }) {
   const [isOpen, setIsOpen] = useState(false);
   const contentId = useId();
 
-  const p1Player = players.find((c) => c.id === record.p1Player)?.name || "Player 1";
-  const p2Player = players.find((c) => c.id === record.p2Player)?.name || "Player 2";
-
   const p1Char = characters.find((c) => c.id === record.p1Character);
   const p2Char = characters.find((c) => c.id === record.p2Character);
+  const p1Player = players.find((p) => p.id === record.p1Player);
+  const p2Player = players.find((p) => p.id === record.p2Player);
 
   const p1Ratio =
     record.p1DamageTaken > 0
@@ -96,7 +95,10 @@ export default function RecordCard({ record, onDelete, rank = null }) {
                 className="record-card-character-icon"
               />
             )}
-            <strong>{p1Char?.name}</strong>
+            <div>
+              <div className="record-card-player-name">{p1Player?.name || "P1"}</div>
+              <strong>{p1Char?.name}</strong>
+            </div>
           </div>
 
           <div className="record-card-plus">+</div>
@@ -109,7 +111,10 @@ export default function RecordCard({ record, onDelete, rank = null }) {
                 className="record-card-character-icon"
               />
             )}
-            <strong>{p2Char?.name}</strong>
+            <div>
+              <div className="record-card-player-name">{p2Player?.name || "P2"}</div>
+              <strong>{p2Char?.name}</strong>
+            </div>
           </div>
         </div>
 
@@ -131,7 +136,7 @@ export default function RecordCard({ record, onDelete, rank = null }) {
           <div className="record-card-stats">
             <div className="record-player-block record-player1">
               <div className="record-player-header">
-                <strong>{p1Player}</strong>
+                <strong>{p1Player?.name || "Player 1"}</strong>
                 <span className="ratio-badge ratio-badge-player">{p1Ratio}</span>
               </div>
 
@@ -148,7 +153,7 @@ export default function RecordCard({ record, onDelete, rank = null }) {
 
             <div className="record-player-block record-player2">
               <div className="record-player-header">
-                <strong>{p2Player}</strong>
+                <strong>{p2Player?.name || "Player 2"}</strong>
                 <span className="ratio-badge ratio-badge-player">{p2Ratio}</span>
               </div>
 

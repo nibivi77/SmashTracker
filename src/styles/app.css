@@ -851,6 +851,29 @@ list-style: none;
   }
 }
 
+.record-card-player-name {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--color-text-soft);
+}
+
+.player-select-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.character-card-player-name {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--color-text-soft);
+}
+
+@media (min-width: 640px) {
+  .player-select-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 @media (min-width: 521px) {
   .record-card-summary,

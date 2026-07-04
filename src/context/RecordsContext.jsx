@@ -7,7 +7,11 @@ function normalizeRecordsData(parsed) {
   if (Array.isArray(parsed)) {
     return {
       version: DATA_VERSION,
-      records: parsed
+      records: parsed.map((record) => ({
+        ...record,
+        p1Player: record.p1Player || "ben",
+        p2Player: record.p2Player || "oli"
+      }))
     };
   }
 
@@ -19,7 +23,11 @@ function normalizeRecordsData(parsed) {
     return {
       version:
         typeof parsed.version === "number" ? parsed.version : DATA_VERSION,
-      records: parsed.records
+      records: parsed.records.map((record) => ({
+        ...record,
+        p1Player: record.p1Player || "ben",
+        p2Player: record.p2Player || "oli"
+      }))
     };
   }
 

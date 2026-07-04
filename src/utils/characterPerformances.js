@@ -2,19 +2,19 @@ import { getPlayerRatio } from "./calculations";
 
 export function buildPerformanceEntry(record, playerSlot) {
   const isPlayer1 = playerSlot === "p1";
-  const player1Name = record.p1Player || "Unknown Player 1";
-  const player2Name = record.p2Player || "Unknown Player 2";
 
   const characterId = isPlayer1 ? record.p1Character : record.p2Character;
   const damageGiven = isPlayer1 ? Number(record.p1DamageGiven) : Number(record.p2DamageGiven);
   const damageTaken = isPlayer1 ? Number(record.p1DamageTaken) : Number(record.p2DamageTaken);
   const partnerCharacterId = isPlayer1 ? record.p2Character : record.p1Character;
+  const playerId = isPlayer1 ? record.p1Player : record.p2Player;
+  const partnerPlayerId = isPlayer1 ? record.p2Player : record.p1Player;
 
   return {
     duoKey: record.duoKey,
-    player1Name,
-    player2Name,
     playerSlot,
+    playerId,
+    partnerPlayerId,
     characterId,
     partnerCharacterId,
     damageGiven,
@@ -37,6 +37,22 @@ export function getPlayer1Performances(records) {
 
 export function getPlayer2Performances(records) {
   return records.map((record) => buildPerformanceEntry(record, "p2"));
+}
+
+export function getPerformancesByPlayerId(records, playerId) {
+  return records.flatMap((record) => {
+    const performances = [];
+
+    if (record.p1Player === playerId) {
+      performances.push(buildPerformanceEntry(record, "p1"));
+    }
+
+    if (record.p2Player === playerId) {
+      performances.push(buildPerformanceEntry(record, "p2"));
+    }
+
+    return performances;
+  });
 }
 
 export function sortPerformancesDesc(a, b) {

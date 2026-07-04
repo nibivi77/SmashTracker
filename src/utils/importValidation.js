@@ -1,4 +1,5 @@
 import { characters } from "../data/characters";
+import { players } from "../data/players";
 import { DATA_VERSION } from "../data/schema";
 import { createDuoKey } from "./duoKey";
 
@@ -10,6 +11,8 @@ for (const character of characters) {
   characterIdMap.set(character.id.toLowerCase(), character.id);
   characterNameMap.set(character.name.toLowerCase(), character.id);
 }
+
+const validPlayerIds = new Set(players.map((player) => player.id));
 
 function normalizeCharacterValue(value) {
   if (typeof value !== "string") {
@@ -42,6 +45,20 @@ function normalizeTimestamp(value) {
   return null;
 }
 
+function normalizePlayerValue(value, defaultValue) {
+  if (typeof value !== "string" || !value.trim()) {
+    return defaultValue;
+  }
+
+  const trimmed = value.trim().toLowerCase();
+
+  if (validPlayerIds.has(trimmed)) {
+    return trimmed;
+  }
+
+  return defaultValue;
+}
+
 export function normalizeImportedData(parsed) {
   let records;
   let version = DATA_VERSION;
@@ -64,10 +81,15 @@ export function normalizeImportedData(parsed) {
     const p1Character = normalizeCharacterValue(record.p1Character);
     const p2Character = normalizeCharacterValue(record.p2Character);
 
+    const p1Player = normalizePlayerValue(record.p1Player, "ben");
+    const p2Player = normalizePlayerValue(record.p2Player, "oli");
+
     return {
       ...record,
       p1Character,
       p2Character,
+      p1Player,
+      p2Player,
       duoKey:
         p1Character && p2Character
           ? createDuoKey(p1Character, p2Character)
@@ -77,7 +99,7 @@ export function normalizeImportedData(parsed) {
   });
 
   return {
-    version,
+    version: DATA_VERSION,
     records: normalizedRecords
   };
 }
@@ -119,6 +141,14 @@ export function validateImportedRecord(record, index) {
     return `Record ${index + 1}: p2Character is not a valid character id.`;
   }
 
+  if (!validPlayerIds.has(record.p1Player)) {
+    return `Record ${index + 1}: p1Player is not a valid player id.`;
+  }
+
+  if (!validPlayerIds.has(record.p2Player)) {
+    return `Record ${index + 1}: p2Player is not a valid player id.`;
+  }
+
   const expectedDuoKey = createDuoKey(record.p1Character, record.p2Character);
 
   if (record.duoKey !== expectedDuoKey) {
@@ -127,10 +157,7 @@ export function validateImportedRecord(record, index) {
 
   if (
     record.timestamp !== null &&
-    (
-      typeof record.timestamp !== "number" ||
-      Number.isNaN(record.timestamp)
-    )
+    (typeof record.timestamp !== "number" || Number.isNaN(record.timestamp))
   ) {
     return `Record ${index + 1}: timestamp must be a number or null.`;
   }

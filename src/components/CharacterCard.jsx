@@ -8,6 +8,8 @@ export default function CharacterCard({ performance, rank = null }) {
 
   const character = characters.find((c) => c.id === performance.characterId);
   const partner = characters.find((c) => c.id === performance.partnerCharacterId);
+  const player = players.find((p) => p.id === performance.playerId);
+  const partnerPlayer = players.find((p) => p.id === performance.partnerPlayerId);
 
   const ratio =
     performance.damageTaken > 0
@@ -79,12 +81,9 @@ export default function CharacterCard({ performance, rank = null }) {
           )}
 
           <div>
+            <div className="character-card-player-name">{player?.name || "Player"}</div>
             <div className="character-card-name-row">
               <strong>{character?.name}</strong>
-            </div>
-
-            <div className="character-card-role">
-              {performance.playerSlot === "p1" ? players.find((c) => c.id === performance.player1Name)?.name : players.find((c) => c.id === performance.player2Name)?.name}
             </div>
           </div>
         </div>
@@ -120,8 +119,7 @@ export default function CharacterCard({ performance, rank = null }) {
 
             <div className="character-stat-line">
               <span>Partner</span>
-              <strong>{partner?.name}</strong>
-              <span>({performance.playerSlot !== "p1" ? players.find((c) => c.id === performance.player1Name)?.name : players.find((c) => c.id === performance.player2Name)?.name})</span>
+              <strong>{partnerPlayer?.name}: {partner?.name}</strong>
             </div>
           </div>
 

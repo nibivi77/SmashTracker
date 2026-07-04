@@ -8,9 +8,12 @@ import MessageBanner from "../components/MessageBanner";
 import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
+import { players } from "../data/players";
 import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
 
 export default function NewRecord() {
+  const [p1PlayerId, setP1PlayerId] = useState("");
+  const [p2PlayerId, setP2PlayerId] = useState("");
   const [player1, setPlayer1] = useState({});
   const [player2, setPlayer2] = useState({});
   const [lastSavedRecord, setLastSavedRecord] = useState(null);
@@ -19,7 +22,18 @@ export default function NewRecord() {
 
   const { saveRecord, getRecord, clearAllRecords } = useRecords();
 
-  function validateRecordInput(player1, player2) {
+  const p1Player = players.find((p) => p.id === p1PlayerId);
+  const p2Player = players.find((p) => p.id === p2PlayerId);
+
+  function validateRecordInput(p1PlayerId, p2PlayerId, player1, player2) {
+    if (!p1PlayerId || !p2PlayerId) {
+      return "Select both players.";
+    }
+
+    if (p1PlayerId === p2PlayerId) {
+      return "Player 1 and Player 2 must be different people.";
+    }
+
     if (!player1.characterId || !player2.characterId) {
       return "Select a character for both players.";
     }
@@ -53,7 +67,7 @@ export default function NewRecord() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const validationError = validateRecordInput(player1, player2);
+    const validationError = validateRecordInput(p1PlayerId, p2PlayerId, player1, player2);
 
     if (validationError) {
       setErrorMessage(validationError);
@@ -65,6 +79,8 @@ export default function NewRecord() {
 
     const record = {
       duoKey: createDuoKey(player1.characterId, player2.characterId),
+      p1Player: p1PlayerId,
+      p2Player: p2PlayerId,
       p1Character: player1.characterId,
       p2Character: player2.characterId,
       p1DamageGiven: Number(player1.damageGiven),
@@ -117,13 +133,59 @@ export default function NewRecord() {
   return (
     <PageContainer title="New Record">
       <form onSubmit={handleSubmit} className="page-form">
-        <Panel title="Player 1">
-          <PlayerEntry onChange={setPlayer1} />
+        <Panel title="Who's Playing?">
+          <div className="player-select-grid">
+            <label className="field-label">
+              Player 1
+              <select
+                className="text-input"
+                value={p1PlayerId}
+                onChange={(e) => setP1PlayerId(e.target.value)}
+              >
+                <option value="">Select player...</option>
+                {players.map((player) => (
+                  <option key={player.id} value={player.id}>
+                    {player.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="field-label">
+              Player 2
+              <select
+                className="text-input"
+                value={p2PlayerId}
+                onChange={(e) => setP2PlayerId(e.target.value)}
+              >
+                <option value="">Select player...</option>
+                {players.map((player) => (
+                  <option key={player.id} value={player.id}>
+                    {player.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         </Panel>
 
-        <Panel title="Player 2">
-          <PlayerEntry onChange={setPlayer2} />
-        </Panel>
+        {p1Player && p2Player && p1PlayerId !== p2PlayerId && (
+          <>
+            <Panel title={p1Player.name}>
+              <PlayerEntry
+                playerName={p1Player.name}
+                onChange={setPlayer1}
+              />
+            </Panel>
+
+            <Panel title={p2Player.name}>
+              <PlayerEntry
+                playerName={p2Player.name}
+                onChange={setPlayer2}
+              />
+            </Panel>
+          </>
+        )}
 
         <div className="form-actions sticky-action-bar">
           <button type="submit" className="primary-button">

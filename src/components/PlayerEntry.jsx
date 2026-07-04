@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CharacterAutocomplete from "./CharacterAutocomplete";
 
-export default function PlayerEntry({ onChange }) {
+export default function PlayerEntry({ playerName = "Player", onChange }) {
   const [query, setQuery] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [damageTaken, setDamageTaken] = useState("");
@@ -46,7 +46,7 @@ export default function PlayerEntry({ onChange }) {
   return (
     <section className="player-entry-panel">
       <CharacterAutocomplete
-        label="Character"
+        label={`${playerName}'s Character`}
         placeholder="Search character..."
         query={query}
         selectedCharacter={selectedCharacter}

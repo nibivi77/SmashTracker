@@ -3,10 +3,10 @@ import { useRecords } from "../context/RecordsContext";
 import CharacterCard from "../components/CharacterCard";
 import EmptyState from "../components/EmptyState";
 import Panel from "../components/Panel";
+import { players } from "../data/players";
 import {
   getAllCharacterPerformances,
-  getPlayer1Performances,
-  getPlayer2Performances,
+  getPerformancesByPlayerId,
   getBestPerformancePerCharacter,
   sortPerformancesDesc
 } from "../utils/characterPerformances";
@@ -18,15 +18,11 @@ export default function CharacterRankings() {
   const [mode, setMode] = useState("top10");
 
   const performances = useMemo(() => {
-    if (scope === "p1") {
-      return getPlayer1Performances(records);
+    if (scope === "all") {
+      return getAllCharacterPerformances(records);
     }
 
-    if (scope === "p2") {
-      return getPlayer2Performances(records);
-    }
-
-    return getAllCharacterPerformances(records);
+    return getPerformancesByPlayerId(records, scope);
   }, [records, scope]);
 
   const visiblePerformances = useMemo(() => {
@@ -40,8 +36,8 @@ export default function CharacterRankings() {
   }, [performances, mode]);
 
   function getPanelTitle() {
-    const scopeLabel =
-      scope === "all" ? "All" : scope === "p1" ? "Player 1" : "Player 2";
+    const scopePlayer = players.find((p) => p.id === scope);
+    const scopeLabel = scope === "all" ? "All" : scopePlayer?.name || scope;
 
     const modeLabel =
       mode === "top10" ? "Top 10" : "Best Per Character";
@@ -62,7 +58,7 @@ export default function CharacterRankings() {
       <div className="character-rankings-toolbar">
         <div className="sort-toggle-stack">
           <div className="compact-toggle-group">
-            <span className="compact-toggle-label">Scope</span>
+            <span className="compact-toggle-label">Player</span>
 
             <div className="compact-toggle-buttons">
               <button
@@ -74,32 +70,17 @@ export default function CharacterRankings() {
                 All
               </button>
 
-              <button
-                type="button"
-                className={`compact-toggle-button ${scope === "p1" ? "active" : ""}`}
-                onClick={() => setScope("p1")}
-                aria-pressed={scope === "p1"}
-              >
-                P1
-              </button>
-
-              <button
-                type="button"
-                className={`compact-toggle-button ${scope === "p2" ? "active" : ""}`}
-                onClick={() => setScope("p2")}
-                aria-pressed={scope === "p2"}
-              >
-                P2
-              </button>
-
-              <button
-                type="button"
-                className={`compact-toggle-button ${scope === "p3" ? "active" : ""}`}
-                onClick={() => setScope("p3")}
-                aria-pressed={scope === "p3"}
-              >
-                P3
-              </button>
+              {players.map((player) => (
+                <button
+                  key={player.id}
+                  type="button"
+                  className={`compact-toggle-button ${scope === player.id ? "active" : ""}`}
+                  onClick={() => setScope(player.id)}
+                  aria-pressed={scope === player.id}
+                >
+                  {player.name}
+                </button>
+              ))}
             </div>
           </div>
 
