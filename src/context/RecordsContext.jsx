@@ -1,40 +1,73 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DATA_VERSION, STORAGE_KEY } from "../data/schema";
+import { createDuoKey } from "../utils/duoKey";
 
 const RecordsContext = createContext();
 
 function normalizeRecordsData(parsed) {
-  if (Array.isArray(parsed)) {
-    return {
-      version: DATA_VERSION,
-      records: parsed.map((record) => ({
-        ...record,
-        p1Player: record.p1Player || "ben",
-        p2Player: record.p2Player || "oli"
-      }))
-    };
-  }
+  let records = [];
 
-  if (
+  if (Array.isArray(parsed)) {
+    records = parsed;
+  } else if (
     parsed &&
     typeof parsed === "object" &&
     Array.isArray(parsed.records)
   ) {
+    records = parsed.records;
+  }
+
+  // Normalize each record
+  const normalizedRecords = records.map((record) => {
+    const p1Player = record.p1Player || "ben";
+    const p2Player = record.p2Player || "oli";
+
+    // Regenerate canonical duoKey
+    const canonicalDuoKey =
+      record.p1Character && record.p2Character
+        ? createDuoKey(record.p1Character, record.p2Character)
+        : record.duoKey;
+
     return {
-      version:
-        typeof parsed.version === "number" ? parsed.version : DATA_VERSION,
-      records: parsed.records.map((record) => ({
-        ...record,
-        p1Player: record.p1Player || "ben",
-        p2Player: record.p2Player || "oli"
-      }))
+      ...record,
+      p1Player,
+      p2Player,
+      duoKey: canonicalDuoKey
     };
+  });
+
+  // Deduplicate by duoKey, keeping the best ratio
+  const recordMap = new Map();
+
+  for (const record of normalizedRecords) {
+    const existing = recordMap.get(record.duoKey);
+
+    if (!existing) {
+      recordMap.set(record.duoKey, record);
+    } else {
+      // Keep the one with better ratio
+      const existingRatio = getSimpleTeamRatio(existing);
+      const newRatio = getSimpleTeamRatio(record);
+
+      if (newRatio > existingRatio) {
+        recordMap.set(record.duoKey, record);
+      }
+    }
   }
 
   return {
     version: DATA_VERSION,
-    records: []
+    records: Array.from(recordMap.values())
   };
+}
+
+function getSimpleTeamRatio(record) {
+  const dealt =
+    Number(record.p1DamageGiven) + Number(record.p2DamageGiven);
+  const taken =
+    Number(record.p1DamageTaken) + Number(record.p2DamageTaken);
+
+  return taken > 0 ? dealt / taken : Infinity;
 }
 
 function loadRecordsData() {
@@ -98,8 +131,9 @@ export function RecordsProvider({ children }) {
   };
 
   const importRecords = (nextRecords) => {
-    setRecords(nextRecords);
-    saveRecordsDataToStorage(nextRecords);
+    const normalized = normalizeRecordsData({ records: nextRecords });
+    setRecords(normalized.records);
+    saveRecordsDataToStorage(normalized.records);
   };
 
   const getRecord = (duoKey) => {

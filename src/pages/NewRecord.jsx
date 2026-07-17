@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlayerEntry from "../components/PlayerEntry";
 import RecordCard from "../components/RecordCard";
 import RecordResultCard from "../components/RecordResultCard";
@@ -11,9 +11,44 @@ import { getTeamRatio } from "../utils/calculations";
 import { players } from "../data/players";
 import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
 
+const PLAYER_DUO_STORAGE_KEY = "smashtracker-player-duo";
+
+function loadSavedPlayerDuo() {
+  try {
+    const raw = localStorage.getItem(PLAYER_DUO_STORAGE_KEY);
+
+    if (!raw) {
+      return { p1PlayerId: "", p2PlayerId: "" };
+    }
+
+    const parsed = JSON.parse(raw);
+
+    return {
+      p1PlayerId: parsed.p1PlayerId || "",
+      p2PlayerId: parsed.p2PlayerId || ""
+    };
+  } catch (error) {
+    console.error("Failed to load saved player duo:", error);
+    return { p1PlayerId: "", p2PlayerId: "" };
+  }
+}
+
+function savePlayerDuo(p1PlayerId, p2PlayerId) {
+  try {
+    localStorage.setItem(
+      PLAYER_DUO_STORAGE_KEY,
+      JSON.stringify({ p1PlayerId, p2PlayerId })
+    );
+  } catch (error) {
+    console.error("Failed to save player duo:", error);
+  }
+}
+
 export default function NewRecord() {
-  const [p1PlayerId, setP1PlayerId] = useState("");
-  const [p2PlayerId, setP2PlayerId] = useState("");
+  const savedDuo = loadSavedPlayerDuo();
+
+  const [p1PlayerId, setP1PlayerId] = useState(savedDuo.p1PlayerId);
+  const [p2PlayerId, setP2PlayerId] = useState(savedDuo.p2PlayerId);
   const [player1, setPlayer1] = useState({});
   const [player2, setPlayer2] = useState({});
   const [lastSavedRecord, setLastSavedRecord] = useState(null);
@@ -24,6 +59,12 @@ export default function NewRecord() {
 
   const p1Player = players.find((p) => p.id === p1PlayerId);
   const p2Player = players.find((p) => p.id === p2PlayerId);
+
+  useEffect(() => {
+    if (p1PlayerId && p2PlayerId && p1PlayerId !== p2PlayerId) {
+      savePlayerDuo(p1PlayerId, p2PlayerId);
+    }
+  }, [p1PlayerId, p2PlayerId]);
 
   function validateRecordInput(p1PlayerId, p2PlayerId, player1, player2) {
     if (!p1PlayerId || !p2PlayerId) {
