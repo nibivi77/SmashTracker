@@ -171,6 +171,16 @@ export default function NewRecord() {
     }
   }
 
+  function handleClearAllRecords() {
+    const confirmed = window.confirm(
+      "This will erase ALL records on this device. If GitHub Sync is connected, it will also erase them on your friend's device the next time they sync. Continue?"
+    );
+
+    if (confirmed) {
+      clearAllRecords();
+    }
+  }
+
   return (
     <PageContainer title="New Record">
       <form onSubmit={handleSubmit} className="page-form">
@@ -237,7 +247,7 @@ export default function NewRecord() {
             <button
               type="button"
               className="secondary-button"
-              onClick={clearAllRecords}
+              onClick={handleClearAllRecords}
             >
               Clear All Records
             </button>
