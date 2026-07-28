@@ -1,45 +1,42 @@
-import { useState } from "react";
+import { characters } from "../data/characters";
 import CharacterAutocomplete from "./CharacterAutocomplete";
 
-export default function PlayerEntry({ playerName = "Player", onChange }) {
-  const [query, setQuery] = useState("");
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [damageTaken, setDamageTaken] = useState("");
-  const [damageGiven, setDamageGiven] = useState("");
+export const emptyPlayerEntry = {
+  characterId: null,
+  query: "",
+  damageGiven: "",
+  damageTaken: ""
+};
+
+export default function PlayerEntry({ playerName = "Player", value, onChange }) {
+  const { characterId, query, damageGiven, damageTaken } = value;
+
+  const selectedCharacter = characterId
+    ? characters.find((c) => c.id === characterId) || null
+    : null;
 
   function handleSelectCharacter(character) {
-    setSelectedCharacter(character);
-    setQuery(character.name);
-
     onChange({
+      ...value,
       characterId: character.id,
-      damageTaken,
-      damageGiven
+      query: character.name
     });
   }
 
-  function handleQueryChange(value) {
-    setQuery(value);
-    setSelectedCharacter(null);
-
+  function handleQueryChange(nextQuery) {
     onChange({
+      ...value,
       characterId: null,
-      damageTaken,
-      damageGiven
+      query: nextQuery
     });
   }
 
-  function updateField(field, value) {
-    const nextDamageTaken = field === "taken" ? value : damageTaken;
-    const nextDamageGiven = field === "given" ? value : damageGiven;
-
-    setDamageTaken(nextDamageTaken);
-    setDamageGiven(nextDamageGiven);
+  function updateField(field, fieldValue) {
+    const key = field === "given" ? "damageGiven" : "damageTaken";
 
     onChange({
-      characterId: selectedCharacter?.id || null,
-      damageTaken: nextDamageTaken,
-      damageGiven: nextDamageGiven
+      ...value,
+      [key]: fieldValue
     });
   }
 

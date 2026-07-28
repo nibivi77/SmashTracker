@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import PlayerEntry from "../components/PlayerEntry";
+import PlayerEntry, { emptyPlayerEntry } from "../components/PlayerEntry";
+import CameraCapture from "../components/CameraCapture";
+import ScanConfirmModal from "../components/ScanConfirmModal";
 import RecordCard from "../components/RecordCard";
 import RecordResultCard from "../components/RecordResultCard";
 import PageContainer from "../components/PageContainer";
@@ -49,11 +51,13 @@ export default function NewRecord() {
 
   const [p1PlayerId, setP1PlayerId] = useState(savedDuo.p1PlayerId);
   const [p2PlayerId, setP2PlayerId] = useState(savedDuo.p2PlayerId);
-  const [player1, setPlayer1] = useState({});
-  const [player2, setPlayer2] = useState({});
+  const [player1, setPlayer1] = useState(emptyPlayerEntry);
+  const [player2, setPlayer2] = useState(emptyPlayerEntry);
   const [lastSavedRecord, setLastSavedRecord] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [resultCardData, setResultCardData] = useState(null);
+  const [scanResult, setScanResult] = useState(null);
+  const [isScanModalOpen, setIsScanModalOpen] = useState(false);
 
   const { saveRecord, getRecord, clearAllRecords } = useRecords();
 
@@ -103,6 +107,21 @@ export default function NewRecord() {
     }
 
     return null;
+  }
+
+  function handleScanComplete(result) {
+    setScanResult(result);
+    setIsScanModalOpen(true);
+  }
+
+  function handleScanConfirm({ player1: confirmedPlayer1, player2: confirmedPlayer2 }) {
+    setPlayer1(confirmedPlayer1);
+    setPlayer2(confirmedPlayer2);
+    setIsScanModalOpen(false);
+  }
+
+  function handleScanCancel() {
+    setIsScanModalOpen(false);
   }
 
   function handleSubmit(event) {
@@ -174,6 +193,10 @@ export default function NewRecord() {
   return (
     <PageContainer title="New Record">
       <form onSubmit={handleSubmit} className="page-form">
+        <Panel title="Scan a Result Screen">
+          <CameraCapture onScanComplete={handleScanComplete} />
+        </Panel>
+
         <Panel title="Who's Playing?">
           <div className="player-select-grid">
             <label className="field-label">
@@ -215,6 +238,7 @@ export default function NewRecord() {
             <Panel title={p1Player.name}>
               <PlayerEntry
                 playerName={p1Player.name}
+                value={player1}
                 onChange={setPlayer1}
               />
             </Panel>
@@ -222,6 +246,7 @@ export default function NewRecord() {
             <Panel title={p2Player.name}>
               <PlayerEntry
                 playerName={p2Player.name}
+                value={player2}
                 onChange={setPlayer2}
               />
             </Panel>
@@ -256,6 +281,13 @@ export default function NewRecord() {
           <RecordCard record={lastSavedRecord} />
         </Panel>
       )}
+
+      <ScanConfirmModal
+        isOpen={isScanModalOpen}
+        scanResult={scanResult}
+        onConfirm={handleScanConfirm}
+        onCancel={handleScanCancel}
+      />
     </PageContainer>
   );
 }

@@ -1145,3 +1145,112 @@ list-style: none;
     backdrop-filter: none;
   }
 }
+
+/* Camera capture */
+
+.camera-capture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.camera-capture-input {
+  display: none;
+}
+
+.camera-capture-button {
+  width: 100%;
+}
+
+.camera-capture-preview {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--preview-bg);
+}
+
+.camera-capture-error {
+  margin: 0;
+  color: var(--color-error-dark);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.camera-capture-warning {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--banner-info);
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+/* Modal */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 100;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: var(--max-content-width);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.modal-title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Scan confirm modal */
+
+.scan-confirm-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .modal-backdrop {
+    align-items: center;
+  }
+
+  .scan-confirm-grid {
+    flex-direction: row;
+  }
+
+  .scan-confirm-grid > * {
+    flex: 1;
+  }
+}
