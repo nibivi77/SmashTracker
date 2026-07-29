@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { onValue, ref, remove, set } from "firebase/database";
+import { db } from "../firebaseConfig";
 import { DATA_VERSION, STORAGE_KEY } from "../data/schema";
-import { GIST_LAST_SYNCED_STORAGE_KEY } from "../data/gistSyncSchema";
 import { createDuoKey } from "../utils/duoKey";
 import { normalizeImportedData, validateImportedRecords } from "../utils/importValidation";
-import { describeGistError, fetchGistFile, updateGistFile } from "../api/githubGist";
 
 const RecordsContext = createContext();
+
+const RECORDS_PATH = "records";
 
 function getSimpleTeamRatio(record) {
   const dealt =
@@ -16,8 +18,10 @@ function getSimpleTeamRatio(record) {
   return taken > 0 ? dealt / taken : Infinity;
 }
 
-// Keeps the better-ratio record per duoKey, regardless of which source
-// (local storage, an imported file, or the shared gist) each one came from.
+// Keeps the better-ratio record per duoKey. Firebase records are already
+// unique by duoKey (that's the RTDB key itself), so this only matters for
+// the local Import-JSON path, where a hand-edited file could contain
+// accidental duplicates.
 function dedupeRecordsByDuoKey(records) {
   const recordMap = new Map();
 
@@ -105,186 +109,95 @@ function saveRecordsDataToStorage(records) {
   }
 }
 
-// Baked into the build via .env.local — every device (including a friend's,
-// who never touches Settings) shares the same gist with no manual setup.
-const GIST_TOKEN = import.meta.env.VITE_DEFAULT_GIST_TOKEN || "";
-const GIST_ID = import.meta.env.VITE_DEFAULT_GIST_ID || "";
-
-function loadLastSyncedAt() {
-  try {
-    const raw = localStorage.getItem(GIST_LAST_SYNCED_STORAGE_KEY);
-    const parsed = raw ? Number(raw) : null;
-    return Number.isFinite(parsed) ? parsed : null;
-  } catch (error) {
-    console.error("Failed to load last-synced time from localStorage:", error);
-    return null;
-  }
-}
-
-// Extracts remote records from a gist's records.json content, running them
-// through the same normalize/dedupe/validate pipeline used for manual JSON
-// imports so a malformed or tampered gist can never corrupt local data.
-function extractTrustedRecords(rawContent) {
-  const normalized = normalizeImportedData(rawContent);
+// The database is publicly writable, so a buggy or malicious client could
+// push malformed data directly via the API — this is the trust boundary
+// that stops that from ever corrupting the UI or localStorage.
+function extractTrustedRecords(snapshotValue) {
+  const recordsArray = Object.values(snapshotValue || {});
+  const normalized = normalizeImportedData(recordsArray);
 
   if (!normalized) {
-    throw new Error("Gist file is not a recognizable records format.");
+    throw new Error("Remote data is not a recognizable records format.");
   }
 
-  const deduped = dedupeRecordsByDuoKey(normalized.records);
-  const validationError = validateImportedRecords(deduped);
+  const validationError = validateImportedRecords(normalized.records);
 
   if (validationError) {
-    throw new Error(`Gist data failed validation: ${validationError}`);
+    throw new Error(`Remote data failed validation: ${validationError}`);
   }
 
-  return deduped;
+  return normalized.records;
+}
+
+function toKeyedObject(records) {
+  return Object.fromEntries(records.map((record) => [record.duoKey, record]));
 }
 
 export function RecordsProvider({ children }) {
   const [records, setRecords] = useState([]);
-
-  const [lastSyncedAt, setLastSyncedAt] = useState(loadLastSyncedAt);
-  const [syncStatus, setSyncStatus] = useState("idle");
-  const [syncError, setSyncError] = useState(null);
-
-  const isSyncConfigured = Boolean(GIST_TOKEN && GIST_ID);
+  const [isConnected, setIsConnected] = useState(false);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState(null);
 
   useEffect(() => {
     const loaded = loadRecordsData();
     setRecords(loaded.records);
   }, []);
 
+  // One persistent subscription — every save/delete from any device (this
+  // one included, since Firebase echoes local writes back immediately)
+  // flows through here, so this is the only place `records` ever gets set
+  // from remote data.
   useEffect(() => {
-    try {
-      if (lastSyncedAt) {
-        localStorage.setItem(GIST_LAST_SYNCED_STORAGE_KEY, String(lastSyncedAt));
-      } else {
-        localStorage.removeItem(GIST_LAST_SYNCED_STORAGE_KEY);
-      }
-    } catch (error) {
-      console.error("Failed to persist last-synced time:", error);
-    }
-  }, [lastSyncedAt]);
+    const recordsRef = ref(db, RECORDS_PATH);
 
-  // Fires once on mount, after the synchronous local-load effect above has
-  // already populated `records` — so there's never a flash of empty state,
-  // and if this fails/there's no signal, whatever localStorage had stays put.
-  useEffect(() => {
-    if (isSyncConfigured) {
-      pullFromGist();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const unsubscribe = onValue(
+      recordsRef,
+      (snapshot) => {
+        try {
+          const trustedRecords = extractTrustedRecords(snapshot.val());
+          setRecords(trustedRecords);
+          saveRecordsDataToStorage(trustedRecords);
+          setLastUpdatedAt(Date.now());
+        } catch (error) {
+          console.error("Ignoring invalid data from Firebase:", error);
+        }
+      },
+      (error) => {
+        console.error("Firebase records listener failed:", error);
+      }
+    );
+
+    return unsubscribe;
   }, []);
 
-  // Merges with whatever is already in local state/storage rather than
-  // overwriting it outright — a device that already has pre-existing
-  // local-only records (e.g. from before gist sync existed) would otherwise
-  // silently lose them the first time this runs. Uses the functional
-  // setRecords form so it always merges against the truly-current local
-  // state, not a possibly-stale closure value from an earlier render.
-  async function pullFromGist() {
-    if (!isSyncConfigured) {
-      return;
-    }
+  useEffect(() => {
+    const connectedRef = ref(db, ".info/connected");
 
-    setSyncStatus("syncing");
-    setSyncError(null);
+    const unsubscribe = onValue(connectedRef, (snapshot) => {
+      setIsConnected(snapshot.val() === true);
+    });
 
-    try {
-      const result = await fetchGistFile({ gistId: GIST_ID, token: GIST_TOKEN });
-
-      if (result.exists) {
-        const remoteRecords = extractTrustedRecords(result.content);
-
-        setRecords((prev) => {
-          const merged = dedupeRecordsByDuoKey([...remoteRecords, ...prev]);
-          saveRecordsDataToStorage(merged);
-          return merged;
-        });
-      }
-
-      setLastSyncedAt(Date.now());
-      setSyncStatus("success");
-    } catch (error) {
-      console.error("Gist pull failed:", error);
-      setSyncStatus("error");
-      setSyncError(describeGistError(error));
-    }
-  }
-
-  // Reconciles with whatever is currently on the gist before writing, rather
-  // than blindly overwriting it with this device's local snapshot. With 3
-  // independent people saving at different times (not always together), a
-  // blind overwrite from a stale device could erase records someone else
-  // already synced. Merging via dedupeRecordsByDuoKey (the same "keep the
-  // better ratio per duoKey" rule already used everywhere else) means an
-  // update to one duoKey never clobbers a concurrent update to another, and
-  // a genuine same-duoKey race just keeps whichever result is better.
-  async function pushToGist(recordsToPush, { deletedDuoKeys = [], replaceRemote = false } = {}) {
-    if (!isSyncConfigured) {
-      return;
-    }
-
-    setSyncStatus("syncing");
-    setSyncError(null);
-
-    try {
-      let merged = recordsToPush;
-
-      if (!replaceRemote) {
-        const remoteResult = await fetchGistFile({ gistId: GIST_ID, token: GIST_TOKEN });
-        const remoteRecords = remoteResult.exists ? extractTrustedRecords(remoteResult.content) : [];
-        merged = dedupeRecordsByDuoKey([...remoteRecords, ...recordsToPush]);
-
-        if (deletedDuoKeys.length > 0) {
-          merged = merged.filter((r) => !deletedDuoKeys.includes(r.duoKey));
-        }
-      }
-
-      await updateGistFile({
-        gistId: GIST_ID,
-        token: GIST_TOKEN,
-        content: { version: DATA_VERSION, records: merged }
-      });
-
-      // Reconcile local state too, in case remote had records this device
-      // didn't have yet (e.g. a friend's save this device never pulled).
-      setRecords(merged);
-      saveRecordsDataToStorage(merged);
-      setLastSyncedAt(Date.now());
-      setSyncStatus("success");
-    } catch (error) {
-      console.error("Gist push failed:", error);
-      setSyncStatus("error");
-      setSyncError(describeGistError(error));
-    }
-  }
+    return unsubscribe;
+  }, []);
 
   const saveRecord = (record) => {
-    setRecords((prev) => {
-      const filtered = prev.filter((r) => r.duoKey !== record.duoKey);
-      const updated = [...filtered, record];
-      saveRecordsDataToStorage(updated);
-      pushToGist(updated);
-      return updated;
+    set(ref(db, `${RECORDS_PATH}/${record.duoKey}`), record).catch((error) => {
+      console.error("Failed to save record to Firebase:", error);
     });
   };
 
   const deleteRecord = (duoKey) => {
-    setRecords((prev) => {
-      const updated = prev.filter((r) => r.duoKey !== duoKey);
-      saveRecordsDataToStorage(updated);
-      pushToGist(updated, { deletedDuoKeys: [duoKey] });
-      return updated;
+    remove(ref(db, `${RECORDS_PATH}/${duoKey}`)).catch((error) => {
+      console.error("Failed to delete record from Firebase:", error);
     });
   };
 
   const importRecords = (nextRecords) => {
     const normalized = normalizeRecordsData({ records: nextRecords });
-    setRecords(normalized.records);
-    saveRecordsDataToStorage(normalized.records);
-    pushToGist(normalized.records, { replaceRemote: true });
+
+    set(ref(db, RECORDS_PATH), toKeyedObject(normalized.records)).catch((error) => {
+      console.error("Failed to import records to Firebase:", error);
+    });
   };
 
   const getRecord = (duoKey) => {
@@ -292,9 +205,9 @@ export function RecordsProvider({ children }) {
   };
 
   const clearAllRecords = () => {
-    setRecords([]);
-    localStorage.removeItem(STORAGE_KEY);
-    pushToGist([], { replaceRemote: true });
+    set(ref(db, RECORDS_PATH), null).catch((error) => {
+      console.error("Failed to clear records in Firebase:", error);
+    });
   };
 
   return (
@@ -306,11 +219,8 @@ export function RecordsProvider({ children }) {
         importRecords,
         getRecord,
         clearAllRecords,
-        isSyncConfigured,
-        syncStatus,
-        syncError,
-        lastSyncedAt,
-        syncNow: pullFromGist
+        isConnected,
+        lastUpdatedAt
       }}
     >
       {children}

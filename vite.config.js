@@ -15,7 +15,10 @@ export default defineConfig({
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
-        icons: []
+        icons: [
+          { src: '/SmashTracker/pwa-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/SmashTracker/pwa-512.png', sizes: '512x512', type: 'image/png' }
+        ]
       }
     })
   ]

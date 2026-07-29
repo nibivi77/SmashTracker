@@ -10,34 +10,13 @@ import {
   validateImportedRecords
 } from "../utils/importValidation";
 
-const SYNC_STATUS_LABELS = {
-  idle: "Not connected",
-  syncing: "Syncing…",
-  success: "Synced",
-  error: "Error"
-};
-
 export default function Settings() {
   const fileInputRef = useRef(null);
-  const {
-    records,
-    importRecords,
-    isSyncConfigured,
-    syncStatus,
-    syncError,
-    lastSyncedAt,
-    syncNow
-  } = useRecords();
+  const { records, importRecords, isConnected, lastUpdatedAt } = useRecords();
   const { theme, isDarkMode, toggleTheme } = useTheme();
 
   const [message, setMessage] = useState("");
   const [messageTone, setMessageTone] = useState("info");
-
-  const syncStatusLabel = isSyncConfigured
-    ? syncStatus === "error"
-      ? `Error: ${syncError}`
-      : SYNC_STATUS_LABELS[syncStatus] || syncStatus
-    : "Not connected";
 
   function handleExport() {
     try {
@@ -158,26 +137,15 @@ export default function Settings() {
         </div>
       </Panel>
 
-      <Panel title="GitHub Sync">
+      <Panel title="Cloud Sync">
         <p className="section-helper-text">
           Records are automatically kept in sync with your group's shared record book.
         </p>
 
         <p className="section-helper-text">
-          Status: {syncStatusLabel}
-          {lastSyncedAt && ` · Last synced: ${new Date(lastSyncedAt).toLocaleString()}`}
+          Status: {isConnected ? "Connected" : "Offline — showing last-known data"}
+          {lastUpdatedAt && ` · Last update: ${new Date(lastUpdatedAt).toLocaleString()}`}
         </p>
-
-        {isSyncConfigured && (
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={syncNow}
-            disabled={syncStatus === "syncing"}
-          >
-            Sync Now
-          </button>
-        )}
       </Panel>
 
       <Panel title="Export Records">
