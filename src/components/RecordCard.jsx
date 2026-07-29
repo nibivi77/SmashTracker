@@ -2,6 +2,8 @@ import { useId, useState } from "react";
 import { characters } from "../data/characters";
 import { players } from "../data/players";
 import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
+import { formatRatio, getPlayerRatio, getTeamRatio } from "../utils/calculations";
+import RankBadge from "./RankBadge";
 
 export default function RecordCard({ record, onDelete, rank = null }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,70 +14,13 @@ export default function RecordCard({ record, onDelete, rank = null }) {
   const p1Player = players.find((p) => p.id === record.p1Player);
   const p2Player = players.find((p) => p.id === record.p2Player);
 
-  const p1Ratio =
-    record.p1DamageTaken > 0
-      ? (record.p1DamageGiven / record.p1DamageTaken).toFixed(2)
-      : "∞";
-
-  const p2Ratio =
-    record.p2DamageTaken > 0
-      ? (record.p2DamageGiven / record.p2DamageTaken).toFixed(2)
-      : "∞";
-
-  const totalDealt =
-    Number(record.p1DamageGiven) + Number(record.p2DamageGiven);
-
-  const totalTaken =
-    Number(record.p1DamageTaken) + Number(record.p2DamageTaken);
-
-  const duoRatio =
-    totalTaken > 0 ? (totalDealt / totalTaken).toFixed(2) : "∞";
+  const p1Ratio = formatRatio(getPlayerRatio(record.p1DamageGiven, record.p1DamageTaken));
+  const p2Ratio = formatRatio(getPlayerRatio(record.p2DamageGiven, record.p2DamageTaken));
+  const duoRatio = formatRatio(getTeamRatio(record));
 
   const savedAt = record.timestamp
     ? new Date(record.timestamp).toLocaleString()
     : "Imported before timestamps";
-
-  function renderRank() {
-    if (rank === null) {
-      return null;
-    }
-
-    if (rank === 1) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}first.png`}
-          alt="1st place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    if (rank === 2) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}second.png`}
-          alt="2nd place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    if (rank === 3) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}third.png`}
-          alt="3rd place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    return (
-      <span className="team-rank-badge-inline">
-        #{rank}
-      </span>
-    );
-  }
 
   return (
     <div className={`record-card accordion-card ${isOpen ? "expanded" : ""}`}>
@@ -123,7 +68,7 @@ export default function RecordCard({ record, onDelete, rank = null }) {
             Duo {duoRatio}
           </div>
 
-          {renderRank()}
+          <RankBadge rank={rank} />
 
           <span className="accordion-arrow" aria-hidden="true">
             ▾

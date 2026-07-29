@@ -101,16 +101,15 @@ export default function AllRecords() {
   }
 
   function togglePlayer(playerId) {
-    console.log("Toggling player:", playerId);
     setActivePlayers((prev) => {
       const next = new Set(prev);
-      console.log("Current active players:", Array.from(prev));
+
       if (next.has(playerId)) {
         next.delete(playerId);
       } else {
         next.add(playerId);
       }
-      console.log("Next active players:", Array.from(next));
+
       return next;
     });
   }

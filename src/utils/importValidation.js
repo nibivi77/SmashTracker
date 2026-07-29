@@ -61,7 +61,6 @@ function normalizePlayerValue(value, defaultValue) {
 
 export function normalizeImportedData(parsed) {
   let records;
-  let version = DATA_VERSION;
 
   if (Array.isArray(parsed)) {
     records = parsed;
@@ -71,8 +70,6 @@ export function normalizeImportedData(parsed) {
     Array.isArray(parsed.records)
   ) {
     records = parsed.records;
-    version =
-      typeof parsed.version === "number" ? parsed.version : DATA_VERSION;
   } else {
     return null;
   }
@@ -104,7 +101,7 @@ export function normalizeImportedData(parsed) {
   };
 }
 
-export function validateImportedRecord(record, index) {
+function validateImportedRecord(record, index) {
   if (!record || typeof record !== "object") {
     return `Record ${index + 1} is invalid.`;
   }

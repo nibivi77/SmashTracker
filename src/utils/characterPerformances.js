@@ -31,14 +31,6 @@ export function getAllCharacterPerformances(records) {
   ]);
 }
 
-export function getPlayer1Performances(records) {
-  return records.map((record) => buildPerformanceEntry(record, "p1"));
-}
-
-export function getPlayer2Performances(records) {
-  return records.map((record) => buildPerformanceEntry(record, "p2"));
-}
-
 export function getPerformancesByPlayerId(records, playerId) {
   return records.flatMap((record) => {
     const performances = [];

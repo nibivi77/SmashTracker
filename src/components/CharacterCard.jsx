@@ -1,6 +1,8 @@
 import { useId, useState } from "react";
 import { characters } from "../data/characters";
 import { players } from "../data/players";
+import { formatRatio, getPlayerRatio } from "../utils/calculations";
+import RankBadge from "./RankBadge";
 
 export default function CharacterCard({ performance, rank = null }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,56 +13,11 @@ export default function CharacterCard({ performance, rank = null }) {
   const player = players.find((p) => p.id === performance.playerId);
   const partnerPlayer = players.find((p) => p.id === performance.partnerPlayerId);
 
-  const ratio =
-    performance.damageTaken > 0
-      ? (performance.damageGiven / performance.damageTaken).toFixed(2)
-      : "∞";
+  const ratio = formatRatio(getPlayerRatio(performance.damageGiven, performance.damageTaken));
 
   const savedAt = performance.timestamp
     ? new Date(performance.timestamp).toLocaleString()
     : "Imported before timestamps";
-
-  function renderRank() {
-    if (rank === null) {
-      return null;
-    }
-
-    if (rank === 1) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}first.png`}
-          alt="1st place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    if (rank === 2) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}second.png`}
-          alt="2nd place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    if (rank === 3) {
-      return (
-        <img
-          src={`${import.meta.env.BASE_URL}third.png`}
-          alt="3rd place"
-          className="team-rank-image-inline"
-        />
-      );
-    }
-
-    return (
-      <span className="team-rank-badge-inline">
-        #{rank}
-      </span>
-    );
-  }
 
   return (
     <div className={`character-card accordion-card ${isOpen ? "expanded" : ""}`}>
@@ -93,7 +50,7 @@ export default function CharacterCard({ performance, rank = null }) {
             {ratio}
           </div>
 
-          {renderRank()}
+          <RankBadge rank={rank} />
 
           <span className="accordion-arrow" aria-hidden="true">
             ▾

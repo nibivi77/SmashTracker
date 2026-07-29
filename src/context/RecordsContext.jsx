@@ -3,20 +3,12 @@ import { onValue, ref, remove, set } from "firebase/database";
 import { db } from "../firebaseConfig";
 import { DATA_VERSION, STORAGE_KEY } from "../data/schema";
 import { createDuoKey } from "../utils/duoKey";
+import { getTeamRatio } from "../utils/calculations";
 import { normalizeImportedData, validateImportedRecords } from "../utils/importValidation";
 
 const RecordsContext = createContext();
 
 const RECORDS_PATH = "records";
-
-function getSimpleTeamRatio(record) {
-  const dealt =
-    Number(record.p1DamageGiven) + Number(record.p2DamageGiven);
-  const taken =
-    Number(record.p1DamageTaken) + Number(record.p2DamageTaken);
-
-  return taken > 0 ? dealt / taken : Infinity;
-}
 
 // Keeps the better-ratio record per duoKey. Firebase records are already
 // unique by duoKey (that's the RTDB key itself), so this only matters for
@@ -28,7 +20,7 @@ function dedupeRecordsByDuoKey(records) {
   for (const record of records) {
     const existing = recordMap.get(record.duoKey);
 
-    if (!existing || getSimpleTeamRatio(record) > getSimpleTeamRatio(existing)) {
+    if (!existing || getTeamRatio(record) > getTeamRatio(existing)) {
       recordMap.set(record.duoKey, record);
     }
   }

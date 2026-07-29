@@ -173,7 +173,7 @@ export default function NewRecord() {
 
   function handleClearAllRecords() {
     const confirmed = window.confirm(
-      "This will erase ALL records on this device. If GitHub Sync is connected, it will also erase them on your friend's device the next time they sync. Continue?"
+      "This will erase ALL records on this device. Since records sync automatically, it will also erase them for everyone else. Continue?"
     );
 
     if (confirmed) {
@@ -238,7 +238,7 @@ export default function NewRecord() {
           </>
         )}
 
-        <div className="form-actions sticky-action-bar">
+        <div className="form-actions">
           <button type="submit" className="primary-button">
             Save Record
           </button>

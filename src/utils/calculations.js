@@ -17,3 +17,8 @@ export function getTeamRatio(record) {
 export function getPlayerRatio(damageGiven, damageTaken) {
   return calculateRatio(Number(damageGiven), Number(damageTaken));
 }
+
+// Ratios are Infinity whenever damage taken is 0 (calculateRatio's contract) — displayed as "∞" rather than the literal word.
+export function formatRatio(ratio) {
+  return Number.isFinite(ratio) ? ratio.toFixed(2) : "∞";
+}
