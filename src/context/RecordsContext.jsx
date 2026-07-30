@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { onValue, ref, remove, set } from "firebase/database";
-import { db } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { DATA_VERSION, STORAGE_KEY } from "../data/schema";
 import { createDuoKey } from "../utils/duoKey";
 import { getTeamRatio } from "../utils/calculations";
@@ -101,9 +102,10 @@ function saveRecordsDataToStorage(records) {
   }
 }
 
-// The database is publicly writable, so a buggy or malicious client could
-// push malformed data directly via the API — this is the trust boundary
-// that stops that from ever corrupting the UI or localStorage.
+// Anyone who opens the app gets an anonymous session and can write, so a
+// buggy client could still push malformed data directly via the API — this
+// is the trust boundary that stops that from ever corrupting the UI or
+// localStorage.
 function extractTrustedRecords(snapshotValue) {
   const recordsArray = Object.values(snapshotValue || {});
   const normalized = normalizeImportedData(recordsArray);
@@ -129,6 +131,7 @@ export function RecordsProvider({ children }) {
   const [records, setRecords] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState(null);
+  const [syncError, setSyncError] = useState(null);
 
   useEffect(() => {
     const loaded = loadRecordsData();
@@ -138,28 +141,51 @@ export function RecordsProvider({ children }) {
   // One persistent subscription — every save/delete from any device (this
   // one included, since Firebase echoes local writes back immediately)
   // flows through here, so this is the only place `records` ever gets set
-  // from remote data.
+  // from remote data. The database rules require `auth != null`, so this
+  // only attaches once the anonymous sign-in below has actually resolved —
+  // attaching it unconditionally would just fail with permission-denied
+  // during that brief window on a fresh session.
   useEffect(() => {
-    const recordsRef = ref(db, RECORDS_PATH);
+    let unsubscribeRecords = () => {};
 
-    const unsubscribe = onValue(
-      recordsRef,
-      (snapshot) => {
-        try {
-          const trustedRecords = extractTrustedRecords(snapshot.val());
-          setRecords(trustedRecords);
-          saveRecordsDataToStorage(trustedRecords);
-          setLastUpdatedAt(Date.now());
-        } catch (error) {
-          console.error("Ignoring invalid data from Firebase:", error);
-        }
-      },
-      (error) => {
-        console.error("Firebase records listener failed:", error);
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        return;
       }
-    );
 
-    return unsubscribe;
+      const recordsRef = ref(db, RECORDS_PATH);
+
+      unsubscribeRecords = onValue(
+        recordsRef,
+        (snapshot) => {
+          try {
+            const trustedRecords = extractTrustedRecords(snapshot.val());
+            setRecords(trustedRecords);
+            saveRecordsDataToStorage(trustedRecords);
+            setLastUpdatedAt(Date.now());
+            setSyncError(null);
+          } catch (error) {
+            console.error("Ignoring invalid data from Firebase:", error);
+            setSyncError("Received invalid data from the database.");
+          }
+        },
+        (error) => {
+          console.error("Firebase records listener failed:", error);
+          setSyncError("Lost the connection to the database.");
+        }
+      );
+    });
+
+    // Firebase reuses the existing anonymous session on repeat visits
+    // instead of creating a new user every time the app loads.
+    signInAnonymously(auth).catch((error) => {
+      console.error("Anonymous sign-in failed:", error);
+    });
+
+    return () => {
+      unsubscribeAuth();
+      unsubscribeRecords();
+    };
   }, []);
 
   useEffect(() => {
@@ -173,23 +199,32 @@ export function RecordsProvider({ children }) {
   }, []);
 
   const saveRecord = (record) => {
-    set(ref(db, `${RECORDS_PATH}/${record.duoKey}`), record).catch((error) => {
-      console.error("Failed to save record to Firebase:", error);
-    });
+    set(ref(db, `${RECORDS_PATH}/${record.duoKey}`), record)
+      .then(() => setSyncError(null))
+      .catch((error) => {
+        console.error("Failed to save record to Firebase:", error);
+        setSyncError("Couldn't save that record to the database.");
+      });
   };
 
   const deleteRecord = (duoKey) => {
-    remove(ref(db, `${RECORDS_PATH}/${duoKey}`)).catch((error) => {
-      console.error("Failed to delete record from Firebase:", error);
-    });
+    remove(ref(db, `${RECORDS_PATH}/${duoKey}`))
+      .then(() => setSyncError(null))
+      .catch((error) => {
+        console.error("Failed to delete record from Firebase:", error);
+        setSyncError("Couldn't delete that record from the database.");
+      });
   };
 
   const importRecords = (nextRecords) => {
     const normalized = normalizeRecordsData({ records: nextRecords });
 
-    set(ref(db, RECORDS_PATH), toKeyedObject(normalized.records)).catch((error) => {
-      console.error("Failed to import records to Firebase:", error);
-    });
+    set(ref(db, RECORDS_PATH), toKeyedObject(normalized.records))
+      .then(() => setSyncError(null))
+      .catch((error) => {
+        console.error("Failed to import records to Firebase:", error);
+        setSyncError("Couldn't import records to the database.");
+      });
   };
 
   const getRecord = (duoKey) => {
@@ -197,9 +232,12 @@ export function RecordsProvider({ children }) {
   };
 
   const clearAllRecords = () => {
-    set(ref(db, RECORDS_PATH), null).catch((error) => {
-      console.error("Failed to clear records in Firebase:", error);
-    });
+    set(ref(db, RECORDS_PATH), null)
+      .then(() => setSyncError(null))
+      .catch((error) => {
+        console.error("Failed to clear records in Firebase:", error);
+        setSyncError("Couldn't clear records in the database.");
+      });
   };
 
   return (
@@ -212,7 +250,8 @@ export function RecordsProvider({ children }) {
         getRecord,
         clearAllRecords,
         isConnected,
-        lastUpdatedAt
+        lastUpdatedAt,
+        syncError
       }}
     >
       {children}

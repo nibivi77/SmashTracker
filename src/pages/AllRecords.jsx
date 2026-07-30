@@ -330,7 +330,7 @@ export default function AllRecords() {
         <EmptyState message="No records match your filters." />
       ) : (
         <ul className="card-list">
-          {visibleRecords.map((record) => (
+          {visibleRecords.map((record, index) => (
             <li
               key={record.duoKey}
               className="card-list-item"
@@ -338,6 +338,7 @@ export default function AllRecords() {
               <RecordCard
                 record={record}
                 onDelete={deleteRecord}
+                rank={sortBy === "ratio" ? index + 1 : null}
               />
             </li>
           ))}
