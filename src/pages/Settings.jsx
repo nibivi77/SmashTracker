@@ -5,6 +5,7 @@ import { DATA_VERSION } from "../data/schema";
 import PageContainer from "../components/PageContainer";
 import Panel from "../components/Panel";
 import MessageBanner from "../components/MessageBanner";
+import ConfirmModal from "../components/ConfirmModal";
 import {
   normalizeImportedData,
   validateImportedRecords
@@ -17,6 +18,7 @@ export default function Settings() {
 
   const [message, setMessage] = useState("");
   const [messageTone, setMessageTone] = useState("info");
+  const [pendingImport, setPendingImport] = useState(null);
 
   function handleExport() {
     try {
@@ -87,19 +89,7 @@ export default function Settings() {
           return;
         }
 
-        const confirmed = window.confirm(
-          "Importing will replace all current records. Continue?"
-        );
-
-        if (!confirmed) {
-          setMessageTone("info");
-          setMessage("Import cancelled.");
-          return;
-        }
-
-        importRecords(normalized.records);
-        setMessageTone("success");
-        setMessage(`Imported ${normalized.records.length} record(s) successfully.`);
+        setPendingImport(normalized.records);
       } catch (error) {
         console.error("Import failed:", error);
         setMessageTone("error");
@@ -110,6 +100,19 @@ export default function Settings() {
     };
 
     reader.readAsText(file);
+  }
+
+  function handleConfirmImport() {
+    importRecords(pendingImport);
+    setMessageTone("success");
+    setMessage(`Imported ${pendingImport.length} record(s) successfully.`);
+    setPendingImport(null);
+  }
+
+  function handleCancelImport() {
+    setMessageTone("info");
+    setMessage("Import cancelled.");
+    setPendingImport(null);
   }
 
   return (
@@ -176,6 +179,16 @@ export default function Settings() {
       </Panel>
 
       <MessageBanner message={message} tone={messageTone} />
+
+      <ConfirmModal
+        isOpen={pendingImport !== null}
+        title="Replace all records?"
+        message={`Importing will replace all ${records.length} current record(s) with ${pendingImport?.length ?? 0} from this file. This can't be undone.`}
+        confirmLabel="Import"
+        tone="danger"
+        onConfirm={handleConfirmImport}
+        onCancel={handleCancelImport}
+      />
     </PageContainer>
   );
 }

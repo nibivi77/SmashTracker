@@ -9,7 +9,6 @@ import { createDuoKey } from "../utils/duoKey";
 import { useRecords } from "../context/RecordsContext";
 import { getTeamRatio } from "../utils/calculations";
 import { players } from "../data/players";
-import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
 
 const PLAYER_DUO_STORAGE_KEY = "smashtracker-player-duo";
 
@@ -55,7 +54,7 @@ export default function NewRecord() {
   const [errorMessage, setErrorMessage] = useState("");
   const [resultCardData, setResultCardData] = useState(null);
 
-  const { saveRecord, getRecord, clearAllRecords } = useRecords();
+  const { saveRecord, getRecord } = useRecords();
 
   const p1Player = players.find((p) => p.id === p1PlayerId);
   const p2Player = players.find((p) => p.id === p2PlayerId);
@@ -171,52 +170,48 @@ export default function NewRecord() {
     }
   }
 
-  function handleClearAllRecords() {
-    const confirmed = window.confirm(
-      "This will erase ALL records on this device. Since records sync automatically, it will also erase them for everyone else. Continue?"
-    );
-
-    if (confirmed) {
-      clearAllRecords();
-    }
-  }
-
   return (
     <PageContainer title="New Record">
       <form onSubmit={handleSubmit} className="page-form">
         <Panel title="Who's Playing?">
           <div className="player-select-grid">
-            <label className="field-label">
-              Player 1
-              <select
-                className="text-input"
-                value={p1PlayerId}
-                onChange={(e) => setP1PlayerId(e.target.value)}
-              >
-                <option value="">Select player...</option>
-                {players.map((player) => (
-                  <option key={player.id} value={player.id}>
-                    {player.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="compact-toggle-group">
+              <span className="compact-toggle-label">Player 1</span>
 
-            <label className="field-label">
-              Player 2
-              <select
-                className="text-input"
-                value={p2PlayerId}
-                onChange={(e) => setP2PlayerId(e.target.value)}
-              >
-                <option value="">Select player...</option>
+              <div className="compact-toggle-buttons">
                 {players.map((player) => (
-                  <option key={player.id} value={player.id}>
+                  <button
+                    key={player.id}
+                    type="button"
+                    className={`compact-toggle-button ${p1PlayerId === player.id ? "active" : ""}`}
+                    onClick={() => setP1PlayerId(player.id)}
+                    disabled={player.id === p2PlayerId}
+                    aria-pressed={p1PlayerId === player.id}
+                  >
                     {player.name}
-                  </option>
+                  </button>
                 ))}
-              </select>
-            </label>
+              </div>
+            </div>
+
+            <div className="compact-toggle-group">
+              <span className="compact-toggle-label">Player 2</span>
+
+              <div className="compact-toggle-buttons">
+                {players.map((player) => (
+                  <button
+                    key={player.id}
+                    type="button"
+                    className={`compact-toggle-button ${p2PlayerId === player.id ? "active" : ""}`}
+                    onClick={() => setP2PlayerId(player.id)}
+                    disabled={player.id === p1PlayerId}
+                    aria-pressed={p2PlayerId === player.id}
+                  >
+                    {player.name}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </Panel>
 
@@ -242,16 +237,6 @@ export default function NewRecord() {
           <button type="submit" className="primary-button">
             Save Record
           </button>
-
-          {ENABLE_RECORD_DELETION_ACTIONS && (
-            <button
-              type="button"
-              className="secondary-button"
-              onClick={handleClearAllRecords}
-            >
-              Clear All Records
-            </button>
-          )}
         </div>
 
         {errorMessage && (

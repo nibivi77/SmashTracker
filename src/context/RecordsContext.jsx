@@ -231,15 +231,6 @@ export function RecordsProvider({ children }) {
     return records.find((r) => r.duoKey === duoKey) || null;
   };
 
-  const clearAllRecords = () => {
-    set(ref(db, RECORDS_PATH), null)
-      .then(() => setSyncError(null))
-      .catch((error) => {
-        console.error("Failed to clear records in Firebase:", error);
-        setSyncError("Couldn't clear records in the database.");
-      });
-  };
-
   return (
     <RecordsContext.Provider
       value={{
@@ -248,7 +239,6 @@ export function RecordsProvider({ children }) {
         deleteRecord,
         importRecords,
         getRecord,
-        clearAllRecords,
         isConnected,
         lastUpdatedAt,
         syncError

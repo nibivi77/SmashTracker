@@ -1,12 +1,13 @@
 import { useId, useState } from "react";
 import { characters } from "../data/characters";
 import { players } from "../data/players";
-import { ENABLE_RECORD_DELETION_ACTIONS } from "../config/devFlags";
 import { formatRatio, getPlayerRatio, getTeamRatio } from "../utils/calculations";
 import RankBadge from "./RankBadge";
+import ConfirmModal from "./ConfirmModal";
 
 export default function RecordCard({ record, onDelete, rank = null }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const contentId = useId();
 
   const p1Char = characters.find((c) => c.id === record.p1Character);
@@ -114,23 +115,36 @@ export default function RecordCard({ record, onDelete, rank = null }) {
             </div>
           </div>
 
-          <div className="record-card-meta">
-            <strong>Saved:</strong> {savedAt}
-          </div>
+          <div className="record-card-footer">
+            <div className="record-card-meta">
+              <strong>Saved:</strong> {savedAt}
+            </div>
 
-          {onDelete && ENABLE_RECORD_DELETION_ACTIONS && (
-            <div className="record-card-actions">
+            {onDelete && (
               <button
                 type="button"
-                className="danger-button"
-                onClick={() => onDelete(record.duoKey)}
+                className="record-delete-button"
+                onClick={() => setIsConfirmingDelete(true)}
               >
-                Delete Record
+                Delete
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={isConfirmingDelete}
+        title="Delete this record?"
+        message={`This will permanently delete the ${p1Char?.name} + ${p2Char?.name} record for everyone. This can't be undone.`}
+        confirmLabel="Delete"
+        tone="danger"
+        onConfirm={() => {
+          onDelete(record.duoKey);
+          setIsConfirmingDelete(false);
+        }}
+        onCancel={() => setIsConfirmingDelete(false)}
+      />
     </div>
   );
 }
